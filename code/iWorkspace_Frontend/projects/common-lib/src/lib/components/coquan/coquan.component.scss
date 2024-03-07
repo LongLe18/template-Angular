@@ -1,0 +1,59 @@
+@use "../../../../../../variables.scss" as *;
+
+
+.view-wrapper-2 {
+    ::ng-deep .dx-header-row {
+        background-color: rgba(215, 215, 215, 1);
+
+        .dx-header-filter {
+            color: #000;
+        }
+    }
+
+    ::ng-deep .dx-datagrid-text-content {
+        font-weight: 600;
+        font-size: 14px;
+        color: #000;
+    }
+
+    ::ng-deep .dx-link-delete {
+        color: red
+    }
+
+    ::ng-deep .dx-datagrid-focus-overlay:after {
+        background-color: transparent;
+    }
+
+    ::ng-deep .dx-button-text {
+        overflow: visible; 
+        text-overflow: unset;
+        text-transform: none;
+    }
+
+    .btn-add {
+        color: #0095D8;
+        font-weight: 400;
+        font-style: italic;
+        // width: 10%;
+    }
+
+    ::ng-deep .dx-datagrid-headers .dx-datagrid-table .dx-row > td:hover:not(.dx-command-select):not(.dx-command-expand):not(.dx-editor-cell):not(.dx-command-edit):not(.dx-datagrid-group-space) {
+        background-color: rgba(215, 215, 215, 1);
+    }
+
+    ::ng-deep .dx-datagrid-text-content {
+        overflow: visible;
+    }
+
+    ::ng-deep .dx-datagrid-nowrap .dx-header-row > td > .dx-datagrid-text-content {
+        white-space: normal;
+    }
+
+    ::ng-deep .dx-texteditor.dx-editor-filled.dx-state-disabled .dx-texteditor-input {
+        color: #000
+    }
+
+    ::ng-deep .dx-state-disabled.dx-widget {
+        opacity: 0.7;
+    }
+}

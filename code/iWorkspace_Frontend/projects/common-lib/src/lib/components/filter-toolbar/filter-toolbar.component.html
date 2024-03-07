@@ -1,0 +1,30 @@
+<div class="row-filter">
+    <dx-text-box
+        class="dx-field"
+        mode="search"
+        [placeholder]="'Search' | translate"
+        [inputAttr]="{ 'aria-label': 'Search' }"
+        stylingMode="filled"
+        (onValueChanged)="onChangeSearch($event)"
+      >
+    </dx-text-box>
+    <div class="dx-field" *ngIf="isSearchDate">
+        <div class="dx-field-value">
+            <dx-date-range-box [value]="initialValue" displayFormat="dd/MM/yyyy"
+                (onValueChanged)="onChangeDates($event)"
+            >
+            </dx-date-range-box>
+        </div>
+    </div>
+    <div *ngIf="isSearchStatus">
+        <dx-select-box 
+            [dataSource]="optionData"
+            valueExpr="ID"
+            displayExpr="Name"
+            [searchEnabled]="true"
+            [label]="labelOption"
+            (onValueChanged)="onChangeOption($event)"
+        >
+        </dx-select-box>
+    </div>
+</div>

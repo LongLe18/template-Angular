@@ -1,0 +1,30 @@
+::ng-deep .form-popup .dx-toolbar-center {
+    width: 100%;
+    border-top: 1px solid rgb(215, 215, 215);
+  }
+  
+  .form-popup-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--popup-toolbar-item-spacing);
+  
+    &.flex-buttons {
+      &::ng-deep .dx-button {
+        flex: 1;
+      }
+    }
+    .skip-btn {
+      border-color: rgb(52, 192, 89);
+      color: rgb(52, 192, 89);border-color: rgb(52, 192, 89);
+      ::ng-deep .dx-button-text {
+        font-weight: 400;
+        font-size: 14px;
+        overflow: visible;
+      }
+    }
+
+    ::ng-deep .dx-button.dx-button-default, .dx-selection {
+      background-color: var(--btn-default);
+    }
+  }

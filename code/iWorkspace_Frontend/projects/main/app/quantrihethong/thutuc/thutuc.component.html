@@ -1,0 +1,104 @@
+<div class="view-wrapper">
+    <breadcrumb [label]="'procedure' | translate" [link]="linkBreadCrumb"></breadcrumb>
+    <dx-data-grid
+          class="grid"
+          noDataText=""
+          height="100%"
+          [dataSource]="dataSource"
+          [allowColumnReordering]="true"
+          [columnAutoWidth]="true"
+          [remoteOperations]= "{paging: true}"
+          (onContentReady)="onContentReady($event)"
+          (onRowClick)="onRowClick($event)"
+          [showBorders]="true"
+    >   
+          <dxo-load-panel [showPane]="true" [enabled]="true"></dxo-load-panel>
+          <dxo-scrolling rowRenderingMode="virtual"></dxo-scrolling>
+          <dxo-paging [pageSize]="20"></dxo-paging>
+          <dxo-pager [visible]="true" [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSizes" ></dxo-pager>
+          <dxo-editing mode="row" 
+            [allowUpdating]="true" 
+            [allowDeleting]="true" 
+            [useIcons]="true"
+          > 
+          </dxo-editing>
+          <dxo-sorting mode="none"></dxo-sorting>
+          <dxo-header-filter [visible]="true">
+            <dxo-search
+              [enabled]="true"
+              [timeout]="700"
+              mode="contains"
+            ></dxo-search>
+          </dxo-header-filter>
+  
+        <!-- Header -->
+        <dxo-toolbar>
+            <dxi-item locateInMenu="auto" location="before">
+                <filter-toolbar [searchObj]="searchSubject"></filter-toolbar>
+            </dxi-item>
+            <dxi-item location="after" locateInMenu="auto">
+                <dx-button
+                [text]="'add' | translate"
+                icon="plus"
+                type="default"
+                stylingMode="contained"
+                height="30"
+                (onClick)="addProcedure()"
+                ></dx-button>
+            </dxi-item>
+            <dxi-item
+                location="after"
+                locateInMenu="auto"
+                showText="inMenu"
+                widget="dxButton"
+                [options]="{
+                text: 'Refresh',
+                icon: 'refresh',
+                onClick: refresh,
+                stylingMode: 'text'
+                }"
+            ></dxi-item>
+        </dxo-toolbar>
+  
+        <!-- Defined Columns -->
+        <dxi-column
+          dataField="stt"
+          caption="STT"
+          cellTemplate="sttEditor"
+          width="80"
+          alignment="center"
+          [allowHeaderFiltering]="false"
+        ></dxi-column>
+        <dxi-column
+            dataField="tenThuTuc"
+            [caption]="'nameprocedure' | translate"
+            [minWidth]="150"
+        ></dxi-column>
+        <dxi-column
+            dataField="coQuanThucHien"
+            [caption]="'agencies' | translate"
+            [minWidth]="150"
+        ></dxi-column>
+        <dxi-column
+            dataField="linhVuc"
+            [caption]="'nameField' | translate"
+            [hidingPriority]="2"
+        ></dxi-column>
+
+        <dxi-column type="buttons" [width]="110" [caption]="'action' | translate">
+          <dxi-button
+            [hint]="'dxDataGrid-editingEditRow' | translate"
+            icon="edit"
+            [visible]="true"
+            [onClick]="onEditClick"
+          ></dxi-button>
+          <dxi-button name="delete" [hint]="'dxDataGrid-editingDeleteRow' | translate"></dxi-button>
+        </dxi-column>
+        
+        <div *dxTemplate="let cellInfo of 'sttEditor'">
+          <div>{{cellInfo.row.rowIndex + 1}}</div>
+        </div>
+
+    </dx-data-grid>
+  
+  </div>

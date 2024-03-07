@@ -1,0 +1,72 @@
+
+<div class="view-wrapper">
+    <breadcrumb [label]="'organizationReport' | translate" [link]="linkBreadCrumb"></breadcrumb>
+    <div class="panel">
+        <dx-data-grid
+          class="grid"
+          noDataText=""
+          [dataSource]="dataSource"
+          [columnAutoWidth]="true"
+          [showBorders]="true"
+          [showColumnLines]="true"
+          (onExporting)="onExporting($event)"
+      >   
+          <dxo-load-panel [showPane]="false"></dxo-load-panel>
+          <dxo-scrolling rowRenderingMode="virtual"></dxo-scrolling>
+          <dxo-sorting mode="none"></dxo-sorting>
+          <dxo-export [enabled]="true"></dxo-export>
+
+          <dxo-toolbar>
+            <dxi-item location="before" >
+              <dx-tabs
+                #withText
+                width="auto"
+                [selectedItem]="LoaiCQ"
+                keyExpr="id"
+                [rtlEnabled]="false"
+                [scrollByContent]="false"
+                [showNavButtons]="false"
+                [dataSource]="tabsOption"
+                stylingMode="primary"
+                (onItemClick)="onItemTabClick($event)"
+              ></dx-tabs>
+            </dxi-item>
+            <dxi-item name="exportButton"></dxi-item>
+          </dxo-toolbar>
+
+          <!-- Defined Columns -->
+
+          <dxi-column
+              dataField="stt"
+              caption="STT"
+              [width]="50"
+              cellTemplate="sttEditor"
+              alignment="center"
+          ></dxi-column>
+
+          <dxi-column
+              dataField="coQuan"
+              [caption]="'coQuan' | translate"
+          ></dxi-column>
+
+          <dxi-column
+              dataField="soLanPH"
+              [caption]="'timeCoop' | translate"
+          ></dxi-column>
+          <dxi-column 
+              dataField="kinhPhi" 
+              [caption]="'funding' | translate"
+          ></dxi-column>
+
+          <div *dxTemplate="let cellInfo of 'sttEditor'">
+            <div>{{cellInfo.row.rowIndex + 1}}</div>
+          </div>
+          
+          <!-- <div *dxTemplate="let cellInfo of 'fundingEditor'">
+              <span *ngFor="let item of cellInfo.value">{{item | currecycustom: ' VNĐ'}}; </span>
+          </div> -->
+
+      </dx-data-grid>
+    </div>
+  
+  </div>

@@ -1,0 +1,32 @@
+<div class="user-panel">
+  <dx-drop-down-button
+    *ngIf="menuMode === 'context'"
+    stylingMode="text"
+    dropDownContentTemplate="dropDownTemplate"
+    [icon]="user?.avatarUrl ? user?.avatarUrl : 'assets/images/avatar.jpg'"
+    [text]="user?.username"
+    [showArrowIcon]="true"
+    [elementAttr]="{
+      class: 'user-button'
+    }"
+    [dropDownOptions]="{
+      width: '180'
+    }"
+    (onContentReady)="handleDropDownButtonContentReady($event)"
+  >
+    <div *dxTemplate="let data of 'dropDownTemplate'">
+      <user-menu-section
+        [menuItems]="menuItems"
+        [showAvatar]="true"
+        [user]="user"
+      ></user-menu-section>
+    </div>
+  </dx-drop-down-button>
+  <div *ngIf="menuMode === 'list'">
+    <user-menu-section
+      [menuItems]="menuItems"
+      [showAvatar]="true"
+      [user]="user"
+    ></user-menu-section>
+  </div>
+</div>

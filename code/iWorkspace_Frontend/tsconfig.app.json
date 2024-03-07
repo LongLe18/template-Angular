@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": [ "node" ],
+    "paths": {
+      "jszip": [
+        "node_modules/jszip/dist/jszip.min.js"
+      ]
+    }
+  },
+  "files": [
+    "projects/main/main.ts",
+    "projects/main/polyfills.ts"
+  ],
+  "include": [
+    "projects/main/**/*.d.ts"
+  ]
+}

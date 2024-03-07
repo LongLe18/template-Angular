@@ -1,0 +1,66 @@
+@use '../../../../../variables.scss' as *;
+
+.notification-panel {
+    ::ng-deep .dx-button-content {
+        position: relative;
+    
+        @media only screen and (max-width: 600px) {
+            display: none;
+        }
+    
+        ::ng-deep .dx-button-text {
+            display: block;
+            position: absolute;
+            background-color: red;
+            color: white;
+            right: 30%;
+            top: 10%;
+            font-size: 12px;
+            padding: 0 4px;
+            border-radius: 15px;
+        }
+    }
+    ::ng-deep .dx-icon-belloutline {
+        font-size: 24px;
+    }
+}
+
+::ng-deep .btn-add {
+    color: #0095D8;
+    font-style: italic;
+    border: none;
+    box-shadow: none;
+    font-style: normal;
+}
+
+.item-notification {
+    display: flex;
+    .avatar-sender {
+        margin-right: 12px;
+        width: 49px;
+        height: 49px;
+
+        @media only screen and (max-width: 600px) {
+            width: 24px;
+            height: 24px;
+        }
+    }
+    .content-notification {
+        font-size: 14px;
+        width: 350px;
+        
+        b {
+            white-space: initial;
+        }
+        .info-sender {
+            margin-top: 8px;
+            font-weight: 400;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+        }
+    }
+    
+}
+

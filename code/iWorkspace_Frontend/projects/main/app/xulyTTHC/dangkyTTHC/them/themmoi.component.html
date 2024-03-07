@@ -1,0 +1,67 @@
+<dx-scroll-view class="view-wrapper-scroll">
+  <div class="view-wrapper">
+    <breadcrumb [label]="'registerTTHC' | translate" [link]="linkBreadCrumb"></breadcrumb>
+    <div class="grid">
+  
+      <div class="panel">
+        <div class="form-container">
+          <dx-form
+            [formData]="formData"
+            [disabled]="isLoading"
+            [showColonAfterLabel]="true"
+          >
+            <dxi-item 
+              dataField="linhVucID" 
+              isRequired="true" 
+              editorType="dxSelectBox"
+              [editorOptions]="linhVucEditorOptions"
+            >
+              <dxo-label [text]="'field2' | translate"></dxo-label>
+              <dxi-validation-rule
+                type="required"
+                [message]="'fieldRequire' | translate"
+              ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="thuTucID" 
+              isRequired="true" 
+              editorType="dxSelectBox"
+              [editorOptions]="thuTucEditorOptions"
+            >
+                <dxo-label [text]="'procedure2' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="note" 
+            >
+              <dxo-label [text]="'note' | translate"></dxo-label>
+            </dxi-item>
+
+            <dxi-item 
+              dataField="hoSo" 
+              [colSpan]="2"
+            >
+              <dxo-label template="customLabel" [text]="'attachDocument' | translate"></dxo-label>
+              <coquan [items]="attachDocumentItems" [titleBtn]="'addpersonalDocument'" [data]="bieuMau"></coquan>
+            </dxi-item>
+            <div *dxTemplate="let data of 'customLabel'">
+              <span class="dx-field-item-label-text customTitle">{{ data.text }}</span>
+            </div>
+
+          </dx-form>
+        </div>
+      </div>
+      
+      <corner-button [items]="listCornerBtn"></corner-button>
+    </div>
+  </div>
+</dx-scroll-view>
+
+<chuyentiep-popup
+  [(visible)]="isForwardPopupOpened"
+  [forWard]="{visible: true, onHandle: onForward}"
+  [data]="dataNhanSu"
+></chuyentiep-popup>

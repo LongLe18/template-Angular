@@ -1,0 +1,39 @@
+@use "../../../../../../variables.scss" as *;
+
+
+.breadcrumb{
+    background-color: rgb(247, 247, 247);
+    list-style: none;
+    max-height: 45px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+    margin: 0;
+    align-items: center;
+    display: flex;
+    height: 45px;
+    padding: 0 var(--content-padding);
+    @media only screen and (max-width: 1200px) {
+        height: 39px
+    }
+}
+    
+.breadcrumb-item{
+    display: inline;
+    font-size: 16px;
+    font-weight: 500;
+}
+  
+.breadcrumb li+li:before{
+    padding: 8px;
+    color: black;
+    content: ">";
+}
+  
+.breadcrumb-item a{
+    color: #2e4053;
+    text-decoration: none;
+}
+  
+// .breadcrumb-item a:hover{
+//     color: red;
+// }
+  

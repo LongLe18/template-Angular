@@ -1,0 +1,126 @@
+@use "../../../variables.scss" as *;
+@use "sass:math";
+
+:host {
+  --side-panel-toolbar-height: 76px;
+
+  width: 100%;
+  display: contents;
+}
+
+.view-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+
+  
+
+  .grid {
+    margin: 0 var(--content-padding);
+    height: calc(100% - 45px);
+    @media only screen and (max-width: 1200px) {
+      height: calc(100% - 39px);
+    }
+    
+    ::ng-deep .title {
+      max-width: 400px; /* Độ rộng tối đa của ô */
+      white-space: nowrap; /* Ngăn chặn trình duyệt tự động xuống dòng */
+      overflow: hidden; /* Ẩn phần nội dung vượt quá độ rộng */
+      text-overflow: ellipsis; /* Hiển thị dấu chấm cuối cùng */
+    }
+    
+    .name-template {
+      .position {
+        font-size: 12px;
+        color: var(--texteditor-label-color);
+      }
+    }
+
+    ::ng-deep .dx-row-focused {
+      .name-template {
+        color: var(--base-focus-color);
+
+        .position.position {
+          color: var(--base-focus-color);
+        }
+      }
+
+      .status {
+        @include status(var(--base-focus-color));
+      }
+    }
+
+    ::ng-deep & {
+      .dx-button.dx-button-default, .dx-selection {
+        background-color: var(--btn-default);
+      }
+
+      .dx-header-row {
+        background-color: rgba(215, 215, 215, 0.996);
+        .dx-datagrid-text-content {
+          font-weight: 600;
+          font-size: 14px;
+          color: #000;
+        }
+        .dx-header-filter {
+          color: #000;
+        }
+      }
+
+      .dx-button.dx-button-default.dx-state-hover {
+        background-color: var(--hover-btn-default);
+      }
+      
+      .dx-button-mode-text.dx-button-default {
+        background-color: transparent;
+      }
+      
+      .dx-link-delete {
+        color: var(--btn-delete);
+      }
+
+      .dx-datagrid-header-panel {
+        padding: 0;
+      }
+
+      .dx-datagrid-pager {
+        border: 1px solid #e7dcdc;
+      }
+      
+      .dx-toolbar {
+        background-color: rgb(246, 249, 254);
+        margin-bottom: 0;
+        padding: var(--toolbar-margin-bottom-2) 0;
+      }
+
+      .dx-datagrid-content .dx-row {
+        cursor: pointer;
+      }
+    }
+
+    .grid-header {
+      @include header();
+    }
+  }
+
+  .btn-update { 
+    background-color: rgba(112, 182, 3, 1);
+  }
+
+  user-panel {
+    display: inherit;
+  }
+}
+
+.edit-cell {
+  position: relative;
+
+  member-status {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 11px;
+  }
+}

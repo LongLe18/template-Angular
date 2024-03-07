@@ -1,0 +1,122 @@
+<dx-scroll-view class="view-wrapper-scroll">
+  <div class="view-wrapper">
+      <breadcrumb [label]="hasParameter ? ('editprocedure' | translate) : ('addprocedure' | translate)" [link]="linkBreadCrumb"></breadcrumb>
+      <div class="grid">
+        <div class="panel">
+          <div class="form-container">
+            <dx-form
+              [formData]="data"
+              [disabled]="isLoading"
+              [showColonAfterLabel]="true"
+              [colCount]="2"
+            >
+              <dxi-item itemType="tabbed" [colSpan]="2">
+                <!-- Tab thông tin thủ tục -->
+                <dxi-tab [title]="'infoProcedure' | translate"
+                  [colCount]="2">
+                  <dxi-item [colSpan]="2"
+                    dataField="tenThuTuc" 
+                    isRequired="true" 
+                  >
+                      <dxo-label [text]="'nameprocedure' | translate"></dxo-label>
+                      <dxi-validation-rule
+                        type="required"
+                        [message]="'fieldRequire' | translate"
+                      ></dxi-validation-rule>
+                  </dxi-item>
+                  <dxi-item
+                    dataField="linhVucID" 
+                    isRequired="true" 
+                    editorType="dxSelectBox"
+                    [editorOptions]="linhVucEditorOptions"
+                  >
+                      <dxo-label [text]="'nameField' | translate"></dxo-label>
+                      <dxi-validation-rule
+                        type="required"
+                        [message]="'fieldRequire' | translate"
+                      ></dxi-validation-rule>
+                  </dxi-item>
+                  <dxi-item 
+                    dataField="typeID" 
+                    isRequired="true" 
+                    editorType="dxSelectBox"
+                    [editorOptions]="typeProcedureEditorOptions"
+                  >
+                      <dxo-label [text]="'typeProcedure' | translate"></dxo-label>
+                      <dxi-validation-rule
+                        type="required"
+                        [message]="'fieldRequire' | translate"
+                      ></dxi-validation-rule>
+                  </dxi-item>
+                  <dxi-item 
+                    dataField="thuTu" 
+                    isRequired="true" 
+                    editorType="dxNumberBox"
+                    >
+                      <dxo-label [text]="'stt' | translate"></dxo-label>
+                      <dxi-validation-rule
+                        type="required"
+                        [message]="'fieldRequire' | translate"
+                      ></dxi-validation-rule>
+                      <dxi-validation-rule 
+                        type="numeric" 
+                        [message]="'fieldValidation' | translate"
+                      >
+                      </dxi-validation-rule>
+                  </dxi-item>
+                  <dxi-item 
+                    dataField="moTa" 
+                  >
+                      <dxo-label [text]="'dxScheduler-editorLabelDescription' | translate"></dxo-label>
+                  </dxi-item>
+                  <dxi-item 
+                    [colSpan]="2"
+                    dataField="coQuanThucHienID" 
+                    isRequired="true" 
+                    editorType="dxSelectBox"
+                    [editorOptions]="coQuanEditorOptions"
+                  >
+                      <dxo-label [text]="'agencies' | translate"></dxo-label>
+                      <dxi-validation-rule
+                        type="required"
+                        [message]="'fieldRequire' | translate"
+                      ></dxi-validation-rule>
+                  </dxi-item>
+                  <dxi-item 
+                    [colSpan]="2"
+                    dataField="hoSo" 
+                  >
+                    <dxo-label [text]="'attachDocument' | translate"></dxo-label>
+                    <coquan [items]="AttachDocumentItems" [action]="true" [titleBtn]="'addProfile'"></coquan>
+                  </dxi-item>
+                </dxi-tab>
+                <!-- Tab Quy trình -->
+                <dxi-tab [title]="'processProcedure' | translate">
+                  <dxi-item 
+                    dataField="quytrinhID" 
+                    editorType="dxSelectBox"
+                    [editorOptions]="processProcedureEditorOptions"
+                  >
+                      <dxo-label [text]="'process' | translate"></dxo-label>
+                  </dxi-item>
+                </dxi-tab>
+              </dxi-item>
+            </dx-form>
+          </div>
+        </div>
+
+        <corner-button [items]="listCornerBtn"></corner-button>
+      </div>
+      <dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{ of: '.view-wrapper' }"
+        [(visible)]="isLoading"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [hideOnOutsideClick]="false"
+      >
+      </dx-load-panel>
+  </div>
+</dx-scroll-view>

@@ -1,0 +1,100 @@
+<dx-scroll-view class="view-wrapper-scroll">
+  <div class="view-wrapper">
+    <breadcrumb [label]="hasParameter ? ('roleedit' | translate) : ('roleadd' | translate)" [link]="linkBreadCrumb"></breadcrumb>
+    <div class="grid">
+    <!-- <dx-toolbar class="toolbar-details">
+      <dxi-item location="before" [text]="'roleedit' | translate"></dxi-item>
+      <dxi-item
+        location="after"
+        locateInMenu="auto"
+        widget="dxButton"
+        showText="inMenu"
+        [options]="{
+          text: 'Refresh',
+          icon: 'refresh',
+          onClick: refresh,
+          stylingMode: 'text'
+        }"
+      ></dxi-item>
+    </dx-toolbar> -->
+
+    <div class="panel">
+      <div class="form-container">
+        <dx-form
+          [formData]="data"
+          [disabled]="isLoading"
+          [showColonAfterLabel]="true"
+          [colCount]="2"
+        >
+          <dxi-item
+            itemType="group"
+            [caption]="'roleinfo' | translate"
+          >
+            <dxi-item 
+              dataField="tenVaiTro" 
+              isRequired="true" 
+               >
+                <dxo-label [text]="'rolename' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="trangThai" 
+              editorType="dxCheckBox"
+              [editorOptions]="{text: 'active2' | translate}" >
+                <dxo-label location="left" [text]="'status' | translate"></dxo-label>
+            </dxi-item>
+
+            <dxi-item 
+              dataField="moTa" 
+              editorType="dxTextArea"
+              [editorOptions]="{height: 90, maxLength: 200}" >
+                <dxo-label [text]="'dxScheduler-editorLabelDescription' | translate"></dxo-label>
+            </dxi-item>
+          </dxi-item>
+
+          <dxi-item cssClass="border-custom"
+            itemType="group"
+            [caption]="'assignRole' | translate"
+          >
+            <dxi-item 
+              dataField="menuRole" 
+            >
+              <dxo-label [visible]="false"></dxo-label>
+              <dx-tree-list
+                [selectedRowKeys]="hasParameter && data.menuRole[0].idRole"
+                [dataSource]="menuRole"
+                [showRowLines]="false"
+                itemsExpr="permission"
+                dataStructure="tree"
+                [columnAutoWidth]="true"
+                [showColumnHeaders]="false"
+              >
+                <dxo-selection mode="multiple" [recursive]="true"></dxo-selection>
+                <dxi-column dataField="tenChucNang" caption=""></dxi-column>
+              </dx-tree-list>
+            </dxi-item>
+          </dxi-item>
+
+        </dx-form>
+      </div>
+    </div>
+
+    <corner-button [items]="listCornerBtn"></corner-button>
+  </div>
+  <dx-load-panel
+      #loadPanel
+      shadingColor="rgba(0,0,0,0.4)"
+      [position]="{ of: '.view-wrapper' }"
+      [(visible)]="isLoading"
+      [showIndicator]="true"
+      [showPane]="true"
+      [shading]="true"
+      [hideOnOutsideClick]="false"
+    >
+  </dx-load-panel>
+</div>
+</dx-scroll-view>
+

@@ -1,0 +1,112 @@
+<div class="view-wrapper-2">
+    <dx-data-grid
+      class="grid"
+      height="100%"
+      [dataSource]="data"
+      [showBorders]="true"
+      (onCellPrepared)="onCellPrepared($event)"
+    >   
+      <dxo-editing mode="cell"
+        [allowUpdating]="false" 
+        [allowDeleting]="action" 
+        [useIcons]="true"
+      > 
+      </dxo-editing>
+
+        <dxi-column
+          caption="STT"
+          width="80"
+          cellTemplate="sttEditor"
+          [allowEditing]="false"
+          alignment="center"
+        ></dxi-column>
+
+        <dxi-column *ngFor="let item of items"
+          [dataField]="item.dataField"
+          [caption]="item.caption"
+          [cellTemplate]="item.cellTemplate"
+          [editCellTemplate]="item.cellTemplate"
+          [width]="item.width"
+        >
+          <!-- Text editor -->
+          <div *dxTemplate="let cellInfo of 'TextEditor'">
+            <dx-text-box 
+              (onValueChanged)="onValueChanged($event, cellInfo)" 
+              [value]="cellInfo.value"
+            >
+            </dx-text-box>
+          </div>
+          
+          <!-- Number editor -->
+          <div *dxTemplate="let cellInfo of 'NumberEditor'">
+            <ng-container *ngFor="let item2 of items">
+              <ng-container *ngIf="item2.dataField === cellInfo.column.dataField">
+                <dx-number-box [showSpinButtons]="true" [disabled]="item2.disabled" (onValueChanged)="onValueChanged($event, cellInfo)" [value]="cellInfo.value"></dx-number-box>
+              </ng-container>
+            </ng-container>
+          </div>
+
+          <!-- Download file -->
+          <div *dxTemplate="let cellInfo of 'Downloader'">
+            <a target="_blank" download [href]="cellInfo.value.url"> 
+              <img 
+                *ngIf="cellInfo.value.url !== '' && cellInfo.value.url !== null && cellInfo.value.url !== undefined" 
+                style="margin-right: 4px;" src="assets/icons/download.svg" alt="download"
+              />
+              {{cellInfo.value.label}}
+            </a>
+          </div>
+  
+          <!-- Checkbox editor -->
+          <div *dxTemplate="let cellInfo of 'CheckBoxEditor'">
+            <div style="display:flex; justify-content: center;">
+              <dx-check-box
+                [value]="cellInfo.value"
+                (onValueChanged)="onValueChanged($event, cellInfo)"
+              ></dx-check-box>
+            </div>
+          </div>
+  
+          <!-- File Uploader  -->
+          <div *dxTemplate="let cellInfo of 'FileUploader'">
+            <dx-file-uploader [multiple]="true" [allowCanceling]="true" labelText=""
+              (onValueChanged)="onValueChanged($event, cellInfo)" uploadMode="useButtons">
+            </dx-file-uploader>
+          </div>
+          
+          <!-- DateBox -->
+          <div *dxTemplate="let cellInfo of 'DateBoxEditor'">
+            <dx-date-box type="date"></dx-date-box>
+          </div>
+
+          <!-- Select box -->
+          <div *dxTemplate="let cellInfo of 'SelectBoxEditor'">
+            <ng-container >
+              <ng-container *ngFor="let item of selectBoxData">
+                <dx-select-box *ngIf="item.dataField === cellInfo.column.dataField"
+                  [placeholder]="'choose' | translate"
+                  [value]="cellInfo.value"
+                  (onValueChanged)="onValueChanged($event, cellInfo)"
+                  [dataSource]="item.data"
+                  [displayExpr]="item.displayExpr"
+                  [valueExpr]="item.valueExpr"
+                  [disabled]="item.disabled"
+                ></dx-select-box>
+              </ng-container>
+            </ng-container>
+            <!-- <div *ngIf="!action">{{cellInfo.value}}</div> -->
+          </div>
+  
+        </dxi-column>
+
+        <div *dxTemplate="let cellInfo of 'sttEditor'">
+          <div>{{cellInfo.row.rowIndex + 1}}</div>
+        </div>
+
+        <dxi-column type="buttons" [width]="100" [caption]="'action' | translate" *ngIf="action">
+          <dxi-button name="delete" [hint]="'dxDataGrid-editingDeleteRow' | translate"></dxi-button>
+        </dxi-column>
+
+    </dx-data-grid>
+    <dx-button *ngIf="actionAddRow" class="btn-add" [text]="titleBtn | translate" (onClick)="addRow()"></dx-button>
+  </div>

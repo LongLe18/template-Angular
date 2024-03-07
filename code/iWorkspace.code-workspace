@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "iworkspace_frontend"
+		},
+		{
+			"path": "iworkspace_backend"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.compile.nullAnalysis.mode": "disabled"
+	}
+}

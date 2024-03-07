@@ -1,0 +1,26 @@
+@use "../../../variables" as *;
+
+.change-password-form {
+    ::ng-deep .dx-button.dx-button-warning {
+        background-color: #fb973f;
+    }
+    
+    ::ng-deep .dx-field-item-label-text {
+        font-weight: 500;
+        font-style: normal;
+        font-size: 14px;
+        color: #000000;
+    }
+    
+    ::ng-deep .dx-field-item-label-location-top {
+        padding-left: 0;
+        padding-right: 0;
+    }
+      
+    .dx-button-text {
+        font-weight: 400;
+        font-size: 16px;
+        color: #fff;
+        text-transform: uppercase;
+    }
+}

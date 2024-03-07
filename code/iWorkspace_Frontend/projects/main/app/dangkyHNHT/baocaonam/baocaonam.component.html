@@ -1,0 +1,119 @@
+
+<div class="view-wrapper">
+    <breadcrumb [label]="'yearreport' | translate" [link]="linkBreadCrumb"></breadcrumb>
+    <div class="panel">
+        <dx-data-grid
+          class="grid"
+          noDataText=""
+          [dataSource]="dataSource"
+          [showBorders]="true"
+          [showColumnLines]="true"
+          (onRowPrepared)="onRowPrepared($event)"
+          (onExporting)="onExporting($event)"
+      >   
+          <dxo-load-panel [showPane]="false"></dxo-load-panel>
+          <dxo-scrolling rowRenderingMode="virtual"></dxo-scrolling>
+          <dxo-sorting mode="none"></dxo-sorting>
+          <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+          <dxo-export [enabled]="true"></dxo-export>
+
+          <dxo-toolbar>
+            <dxi-item  location="before">
+              <div>{{'reportyear' | translate}}</div>
+            </dxi-item>
+            <dxi-item  location="before">
+              <dx-select-box 
+                [searchEnabled]="true"
+                [items]="yearsOption"
+                valueExpr="value"
+                displayExpr="text"
+                value="2022"
+              >
+              </dx-select-box>
+            </dxi-item>
+            <dxi-item  location="before">
+              <dx-button [text]="'dxDataGrid-headerFilterOK' | translate" type="default" stylingMode="contained"></dx-button>
+            </dxi-item>
+            <dxi-item name="exportButton"></dxi-item>
+          </dxo-toolbar>
+
+          <!-- Defined Columns -->
+          <dxi-column [groupIndex]="0"
+              dataField="suKien"
+              [caption]="'event' | translate"
+          >
+          </dxi-column>
+
+          <dxi-column
+              dataField="stt"
+              caption="STT"
+              alignment="center"
+              [width]="5"
+          ></dxi-column>
+
+          <dxi-column
+              width="130"
+              dataField="tenHoiThao"
+              [caption]="'seminar' | translate"
+          ></dxi-column>
+
+          <dxi-column
+              width="120"
+              dataField="tenCoQuanPhoiHop"
+              [caption]="'namecoordinating' | translate"
+          ></dxi-column>
+          <dxi-column 
+              width="130"
+              dataField="noiDung" 
+              [caption]="'content' | translate"
+          ></dxi-column>
+          <dxi-column
+              dataField="thoiGian"
+              [caption]="'time' | translate"
+              dataType="date"
+          ></dxi-column>
+          <dxi-column
+              dataField="diaDiem"
+              [caption]="'place' | translate"
+          ></dxi-column>
+          <dxi-column
+            dataField="donViToChuc"
+            [caption]="'Organizationalunits' | translate"
+          ></dxi-column>
+          <dxi-column 
+            width="50"
+            dataField="soLuongDBVN"
+            [caption]="'numberDBVN' | translate"
+          ></dxi-column>
+          <dxi-column
+            width="50"
+            dataField="soLuongDBNN"
+            [caption]="'numberDBNN' | translate"
+          ></dxi-column>
+          <dxi-column
+            dataField="from"
+            [caption]="'fromCountries' | translate"
+          ></dxi-column>
+          <dxi-column
+            dataField="kinhPhi"
+            [caption]="'expense' | translate"
+          ></dxi-column>
+          <dxi-column
+            dataField="capPhepCho"
+            [caption]="'grantPermission' | translate"
+          ></dxi-column>
+
+          <dxi-column
+            dataField="hoatdong"
+            [caption]="'active' | translate"
+          ></dxi-column>
+          <dxi-column
+            dataField="ghiChu"
+            [caption]="'note' | translate"
+          ></dxi-column>
+
+        
+      </dx-data-grid>
+    </div>
+  
+  </div>

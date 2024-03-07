@@ -1,0 +1,27 @@
+@use "../../../../../variables.scss" as *;
+
+:host {
+  flex-direction: column;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.layout-body {
+  flex: 1;
+  min-height: 0;
+  background-color: var(--base-bg);
+}
+
+.content {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+}
+
+
+::ng-deep .dx-drawer-panel-content {
+  // position: relative;
+  // z-index: 10;
+  box-shadow: 5px 1px 5px rgba(0, 0, 0, 0.098039215);
+}

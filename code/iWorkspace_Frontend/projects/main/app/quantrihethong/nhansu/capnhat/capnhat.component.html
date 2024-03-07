@@ -1,0 +1,142 @@
+<dx-scroll-view class="view-wrapper-scroll">
+  <div class="view-wrapper">
+    <breadcrumb [label]="hasParameter ? ('addfield' | translate) : ('addMember' | translate)" [link]="linkBreadCrumb"></breadcrumb>
+
+    <div class="grid">
+
+      <div class="panel">
+        <form-avatar  style="height: 100px;"
+          [editable]="true"
+          [size]="100"
+        ></form-avatar>
+        <div class="form-container">
+          <dx-form
+            [formData]="data"
+            [disabled]="isLoading"
+            [showColonAfterLabel]="true"
+            [colCount]="2"
+          >
+            <dxi-item 
+              dataField="tenDangNhap" 
+              isRequired="true" 
+              >
+                <dxo-label [text]="'username' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="hoVaTen" 
+              isRequired="true" 
+              
+            >
+                <dxo-label [text]="'fullname' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="email" 
+              [editorOptions]="{ mode: 'email'}"
+            >
+                <dxo-label text="Email"></dxo-label>
+                <dxi-validation-rule
+                  type="email"
+                  [message]="'message-email-error' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+                dataField="gioiTinh" 
+                editorType="dxSelectBox"
+                [editorOptions]="gioiTinhOptions"
+              >
+                <dxo-label [text]="'gender' | translate"></dxo-label>
+            </dxi-item>
+            <dxi-item 
+                dataField="ngaySinh" 
+                editorType="dxDateBox"
+                [editorOptions]="{placeholder: 'dd/mm/yyyy'}"
+              >
+                <dxo-label [text]="'birthday' | translate"></dxo-label>
+            </dxi-item>
+            <dxi-item 
+              dataField="sdt" 
+              [editorOptions]="{mask: maskSDT}"
+            >
+                <dxo-label [text]="'phone' | translate"></dxo-label>
+            </dxi-item>
+            <dxi-item 
+                dataField="trinhDoID" 
+                editorType="dxSelectBox"
+                [editorOptions]="trinhDoOptions"
+              >
+                <dxo-label [text]="'level2' | translate"></dxo-label>
+            </dxi-item>
+            <dxi-item 
+                dataField="trangThai" 
+                editorType="dxCheckBox"
+                [editorOptions]="{text: 'active2' | translate}" >
+                  <dxo-label location="left" [text]="'status' | translate"></dxo-label>
+            </dxi-item> 
+            <dxi-item 
+                dataField="coQuan" 
+                [colSpan]="2"
+              >
+                <dxo-label template="customLabel" [text]="'organizationAndPosition' | translate"></dxo-label>
+                <coquan *ngIf="hasParameter" [items]="OrganizationAndPositionItems" [data]="data.coQuan" [selectBoxData]="selectBoxDataCoQuan"></coquan>
+                <coquan *ngIf="!hasParameter" [items]="OrganizationAndPositionItems" [selectBoxData]="selectBoxDataCoQuan"></coquan>
+
+            </dxi-item>
+            <dxi-item 
+                [colSpan]="2"
+                dataField="vaiTroID" 
+                editorType="dxTagBox"
+                [editorOptions]="vaiTroOptions"
+              >
+              <dxo-label [text]="'role' | translate"></dxo-label>
+            </dxi-item>
+            <dxi-item *ngIf="isPermission"
+              itemType="group"
+              caption="Quyền xử lý theo đơn vị"
+              [colSpan]="2"
+            >
+              <dxi-item style="display: flex; width: 100%; justify-content: space-between;">
+                <div style="display: flex; align-self: center;">
+                  <dx-check-box [value]="!havePermission" style="padding: 0 12px" (onValueChanged)="onHavePermission($event)"></dx-check-box>
+                  <div class="text-pheduyet">Phê duyệt toàn bộ thủ tục HNHT</div>
+                </div>
+                <dx-tag-box style="width: 70%" 
+                    [dataSource]="sampleQuyen"
+                    valueExpr="ID"
+                    displayExpr="Name"
+                    [disabled]="havePermission"
+                    [value]="permission"
+                    (onValueChanged)="onPermissionChanged($event)">
+                </dx-tag-box>
+              </dxi-item>
+            </dxi-item>
+            <div *dxTemplate="let data of 'customLabel'">
+              <span class="dx-field-item-label-text customTitle">{{ data.text }}</span>
+            </div>
+          </dx-form>
+        </div>
+      </div>
+
+     <corner-button [items]="listCornerBtn"></corner-button>
+  </div>
+  <dx-load-panel
+      #loadPanel
+      shadingColor="rgba(0,0,0,0.4)"
+      [position]="{ of: '.view-wrapper' }"
+      [(visible)]="isLoading"
+      [showIndicator]="true"
+      [showPane]="true"
+      [shading]="true"
+      [hideOnOutsideClick]="false"
+    >
+  </dx-load-panel>
+</div>
+
+</dx-scroll-view>

@@ -1,0 +1,109 @@
+<form class="login-form" (submit)="onSubmit($event)">
+  <dx-form
+    [formData]="formData"
+    [disabled]="loading"
+    [showColonAfterLabel]="true"
+    [showRequiredMark]="false"
+    [colCount]="(screen.xSmallScreenChanged | async) ? 2 : 4"
+  >
+    <dxi-item
+      dataField="username"
+      editorType="dxTextBox"
+      [editorOptions]="{
+        stylingMode: 'filled',
+        mode: 'text',
+        value: defaultAuthData?.data?.username
+      }"
+      [colSpan]="4"
+    >
+      <dxi-validation-rule
+        type="required"
+        [message]="'message-user' | translate"
+      ></dxi-validation-rule>
+      <dxi-validation-rule
+        type="pattern"
+        pattern="^[a-zA-Z0-9_]{3,16}$"
+        [message]="'fieldValidation' | translate"
+      ></dxi-validation-rule>
+      <dxo-label [text]="'username' | translate"></dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField="password"
+      [colSpan]="4"
+    >
+      <password-text-box
+        [(value)]="password"
+        (valueChanged)="onChangPassword($event)"
+        stylingMode="filled"
+        [validators]="[{ type: 'required', message: 'message-pasword' | translate }]"
+      ></password-text-box>
+      <dxo-label [text]="'password' | translate"> </dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField="rememberMe"
+      editorType="dxCheckBox"
+      [editorOptions]="{
+        text: 'remember-me' | translate,
+        elementAttr: { class: 'form-text' }
+      }"
+      [colSpan]="2"
+    >
+      <dxo-label [visible]="false"></dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField=""
+      editorType=""
+      [colSpan]="2"
+    >
+      <dxo-label [visible]="false"></dxo-label>
+      <div class="reset-link">
+        <a [routerLink]="resetLink">{{'forgotpassword' | translate}}?</a>
+      </div>
+    </dxi-item>
+
+    <dxi-item itemType="button" [colSpan]="4">
+      <dxo-button-options
+        width="100%"
+        height="40px"
+        type="warning"
+        cssClass="btn-sign-in"
+        [useSubmitBehavior]="true"
+        [template]="'signInTemplate'"
+      >
+      </dxo-button-options>
+    </dxi-item>
+
+    <ng-container *dxTemplate="let item of 'signInTemplate'">
+      <span class="dx-button-text">
+        <ng-container *ngIf="loading; else notLoading">
+          <dx-load-indicator
+            width="24px"
+            height="24px"
+            [visible]="true"
+          ></dx-load-indicator>
+        </ng-container>
+        <ng-template #notLoading>{{'signin' | translate}}</ng-template>
+      </span>
+    </ng-container>
+  </dx-form>
+
+  <div class="description-text">
+    <p><span>Bản quyền thuộc về Đại học Quốc gia Hà Nội</span></p>
+    <p><span>Khu đô thị ĐHQGHN tại Hoà Lạc, Thạch Thất, Hà Nội     </span></p>
+    <p><span>Webmaster: media@vnu.edu.vn</span></p>
+  </div>
+  <!-- <dx-button
+    class="btn-create-account"
+    [text]="'createaccount' | translate"
+    [stylingMode]="btnStylingMode"
+    width="100%"
+    height="40px"
+    (onClick)="onCreateAccountClick()"
+  >
+  </dx-button> -->
+
+  <!-- <app-login-oauth></app-login-oauth> -->
+</form>

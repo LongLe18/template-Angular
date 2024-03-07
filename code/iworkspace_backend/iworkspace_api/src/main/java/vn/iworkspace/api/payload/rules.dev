@@ -1,0 +1,2 @@
+
+quy tắc của DTO, không trao đổi id trực tiếp với frontend, ở frontend chỉ trao đổi bằng guid, chỉ trường hợp không xử lý được bằng guid thì mới dùng id.

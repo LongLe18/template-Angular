@@ -1,0 +1,103 @@
+<dx-scroll-view class="view-wrapper-scroll">
+    <div class="view-wrapper">
+      <breadcrumb [label]="hasParameter ? ('editforeignManagement' | translate) : ('addforeignManagement' | translate)" [link]="linkBreadCrumb"></breadcrumb>
+      
+      <div class="grid">
+  
+      <div class="panel">
+        <div class="form-container">
+          <dx-form
+            [formData]="data"
+            [disabled]="isLoading"
+            [showColonAfterLabel]="true"
+          >
+            <dxi-item 
+              dataField="hoVaTen" 
+              isRequired="true" 
+              >
+                <dxo-label [text]="'fullname' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+                dataField="ngaySinh" 
+                editorType="dxDateBox"
+              >
+                <dxo-label [text]="'birthday' | translate"></dxo-label>
+            </dxi-item>
+            <dxi-item 
+              dataField="quocTich" 
+              isRequired="true" 
+              >
+                <dxo-label [text]="'nationality' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+                dataField="danhXung" 
+                editorType="dxSelectBox"
+                [editorOptions]="danhXungOptions"
+              >
+                <dxo-label [text]="'titles' | translate"></dxo-label>
+            </dxi-item>
+            <dxi-item 
+              dataField="hoChieu" 
+              isRequired="true" 
+              >
+                <dxo-label [text]="'passport' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="ngheNghiep" 
+              isRequired="true" 
+              >
+                <dxo-label [text]="'job' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="noiLamViec" 
+              isRequired="true" 
+              >
+                <dxo-label [text]="'atJob' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="trangThai" 
+              editorType="dxCheckBox"
+              [editorOptions]="{text: 'active2' | translate}" >
+                <dxo-label location="left" [text]="'status' | translate"></dxo-label>
+            </dxi-item>
+          </dx-form>
+        </div>
+      </div>
+  
+      <corner-button [items]="listCornerBtn"></corner-button>
+
+    </div>
+    <dx-load-panel
+      #loadPanel
+      shadingColor="rgba(0,0,0,0.4)"
+      [position]="{ of: '.view-wrapper' }"
+      [(visible)]="isLoading"
+      [showIndicator]="true"
+      [showPane]="true"
+      [shading]="true"
+      [hideOnOutsideClick]="false"
+    >
+    </dx-load-panel>
+  </div>
+  </dx-scroll-view>
+  

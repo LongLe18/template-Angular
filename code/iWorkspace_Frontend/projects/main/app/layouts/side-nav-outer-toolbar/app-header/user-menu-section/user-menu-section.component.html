@@ -1,0 +1,22 @@
+<div>
+  <div class="user-info">
+    <div class="image-container" *ngIf="showAvatar">
+      <div
+        [style.backgroundImage]="user?.avatarUrl ? 'url(' + user?.avatarUrl + ')' : 'url(' + 'assets/images/avatar.jpg' + ')'"
+        class="user-image"
+      ></div>
+    </div>
+    <div>
+      <div class="user-name">{{ user?.username }}</div>
+      <div class="role">Trưởng phòng</div>
+    </div>
+  </div>
+  <dx-list
+    #userInfoList
+    [items]="menuItems"
+    [elementAttr]="{
+      class: 'user-info-list'
+    }"
+    (onItemClick)="handleListItemClick($event)"
+  ></dx-list>
+</div>

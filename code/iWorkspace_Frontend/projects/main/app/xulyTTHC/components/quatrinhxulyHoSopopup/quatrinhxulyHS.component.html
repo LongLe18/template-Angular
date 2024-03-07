@@ -1,0 +1,140 @@
+<popup
+  [titleText]="'processHandle' | translate"
+  [visible]="visible"
+  [wrapperAttr]="{ class: 'process-procedure-popup' }"
+  (visibleChange)="changeVisible($event)"
+  [width]="900"
+>   
+    <dx-tab-panel
+        width="100%"
+        [height]="418"
+        [animationEnabled]="false"
+        [swipeEnabled]="true"
+        tabsPosition="top"
+        stylingMode="primary"
+    >   
+            
+        <dxi-item [title]="'processHandle2' | translate" >
+            <dx-data-grid
+                class="grid-popup"
+                noDataText=""
+                [dataSource]="data"
+                [allowColumnReordering]="true"
+                [columnAutoWidth]="true"
+            >   
+                <dxo-load-panel [showPane]="false"></dxo-load-panel>
+                <dxo-scrolling rowRenderingMode="virtual"></dxo-scrolling>
+                <dxo-editing mode="row" 
+                    [allowUpdating]="true" 
+                    [allowDeleting]="true" 
+                    [useIcons]="true"
+                > 
+                </dxo-editing>
+                <dxo-sorting mode="none"></dxo-sorting>
+                <dxo-header-filter [visible]="false"></dxo-header-filter>
+    
+                    
+    
+                <dxi-column
+                    dataField="stt"
+                    caption="STT"
+                    width="70"
+                    alignment="center"
+                    cellTemplate="sttEditor"
+                ></dxi-column>
+    
+                <dxi-column
+                    dataField="hoVaTen"
+                    [caption]="'fullname' | translate"
+                ></dxi-column>
+    
+                <dxi-column
+                    dataField="thoiGian" dataType="datetime" 
+                    format="dd/MM/yyyy hh:mm:ss"
+                    [caption]="'timeregister' | translate"
+                ></dxi-column>
+            
+                <dxi-column
+                    dataField="xuLy"
+                    [caption]="'handle' | translate"
+                ></dxi-column>
+    
+                <dxi-column
+                    dataField="yKien" 
+                    [caption]="'commentHandling' | translate"
+                ></dxi-column>
+    
+                <dxi-column
+                    dataField="file"
+                    [caption]="'attachFile' | translate"
+                ></dxi-column>
+    
+                <dxi-column type="buttons" [width]="110" [caption]="'version' | translate">
+                    <dxi-button [text]="'view' | translate" class="btn-view"
+                        [hint]="'version' | translate" 
+                        type="success"
+                    ></dxi-button>
+                </dxi-column>
+    
+                <div *dxTemplate="let cellInfo of 'sttEditor'">
+                    <div>{{cellInfo.row.rowIndex + 1}}</div>
+                </div>
+    
+            </dx-data-grid>
+        </dxi-item>
+
+        <dxi-item [title]="'version' | translate" >
+
+            <dx-data-grid
+                class="grid-popup"
+                noDataText=""
+                [dataSource]="dataVersion"
+                [allowColumnReordering]="true"
+                [columnAutoWidth]="true"
+            >   
+                <dxo-load-panel [showPane]="false"></dxo-load-panel>
+                <dxo-scrolling rowRenderingMode="virtual"></dxo-scrolling>
+                <dxo-editing mode="row" 
+                    [allowUpdating]="true" 
+                    [allowDeleting]="true" 
+                    [useIcons]="true"
+                > 
+                </dxo-editing>
+                <dxo-sorting mode="none"></dxo-sorting>
+                <dxo-header-filter [visible]="false"></dxo-header-filter>
+    
+                <dxi-column
+                    dataField="stt"
+                    caption="STT"
+                    width="70"
+                    alignment="center"
+                    cellTemplate="sttEditor"
+                ></dxi-column>
+    
+                <dxi-column
+                    dataField="thoiGianCapNhat" dataType="datetime" 
+                    format="dd/MM/yyyy hh:mm:ss"
+                    [caption]="'timeupdate' | translate"
+                ></dxi-column>
+            
+                <dxi-column
+                    dataField="nguoiCapNhat"
+                    [caption]="'handle' | translate"
+                ></dxi-column>
+    
+                <dxi-column type="buttons" [width]="110" [caption]="'version' | translate">
+                    <dxi-button [text]="'view' | translate" class="btn-view"
+                        [hint]="'version' | translate" 
+                        type="success"
+                    ></dxi-button>
+                </dxi-column>
+    
+                <div *dxTemplate="let cellInfo of 'sttEditor'">
+                    <div>{{cellInfo.row.rowIndex + 1}}</div>
+                </div>
+    
+            </dx-data-grid>
+        </dxi-item>
+
+    </dx-tab-panel>
+</popup>

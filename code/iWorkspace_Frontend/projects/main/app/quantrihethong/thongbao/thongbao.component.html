@@ -1,0 +1,102 @@
+<div class="view-wrapper">
+    <breadcrumb [label]="'notification' | translate" [link]="linkBreadCrumb"></breadcrumb>
+    <dx-data-grid
+          class="grid"
+          noDataText=""
+          height="100%"
+          [dataSource]="dataSource"
+          [allowColumnReordering]="true"
+          [columnAutoWidth]="true"
+          [remoteOperations]= "{paging: true}"
+          (onContentReady)="onContentReady($event)"
+          [showBorders]="true"
+    >   
+          <dxo-load-panel [showPane]="false"></dxo-load-panel>
+          <dxo-scrolling rowRenderingMode="virtual"></dxo-scrolling>
+          <dxo-selection
+            selectAllMode="page"
+            showCheckBoxesMode="always"
+            mode="multiple"
+          ></dxo-selection>
+          <dxo-paging [pageSize]="20"></dxo-paging>
+          <dxo-pager [visible]="true" [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSizes" ></dxo-pager>
+          <dxo-sorting mode="none"></dxo-sorting>
+          <dxo-header-filter [visible]="true" [allowSearch]="true"></dxo-header-filter>
+  
+        <!-- Header -->
+        <dxo-toolbar>
+            
+            <dxi-item locateInMenu="auto" location="before">
+                <filter-toolbar [searchObj]="searchSubject"></filter-toolbar>
+            </dxi-item>
+            <dxi-item location="after" locateInMenu="auto">
+                <dx-button
+                [text]="'marked' | translate"
+                icon="plus"
+                type="default"
+                stylingMode="contained"
+                height="30"
+                (onClick)="marked()"
+                ></dx-button>
+            </dxi-item>
+            <dxi-item
+                location="after"
+                locateInMenu="auto"
+                showText="inMenu"
+                widget="dxButton"
+                [options]="{
+                text: 'Refresh',
+                icon: 'refresh',
+                onClick: refresh,
+                stylingMode: 'text'
+                }"
+            ></dxi-item>
+        </dxo-toolbar>
+  
+        <!-- Defined Columns -->
+        <dxi-column
+          dataField="stt"
+          caption="STT"
+          cellTemplate="sttEditor"
+          width="80"
+          alignment="center"
+          [allowHeaderFiltering]="false"
+        ></dxi-column>
+
+        <dxi-column
+            dataField="nguoiGui"
+            [caption]="'sender' | translate"
+            [minWidth]="150"
+            cellTemplate="sender"
+        >
+            <dxo-header-filter 
+                [dataSource]="orderHeaderFilter">
+            </dxo-header-filter>
+        </dxi-column>
+
+        <dxi-column
+            dataField="thoiGian"
+            [caption]="'time' | translate"
+            cellTemplate="timeText"
+        ></dxi-column>
+        <dxi-column cssClass="title"
+            dataField="tieuDe"
+            [caption]="'title' | translate"
+        ></dxi-column>
+  
+        <div *dxTemplate="let cellInfo of 'sttEditor'">
+          <div>{{cellInfo.row.rowIndex + 1}}</div>
+        </div>
+
+        <div *dxTemplate="let cellInfo of 'timeText'">
+          <div>{{cellInfo.value | date:'dd/MM/yyyy hh:mm:ss' }}</div>
+        </div>
+
+        <div *dxTemplate="let cellInfo of 'sender'">
+          <div style="font-weight: 700; ">{{cellInfo.value.hoVaTen}}</div>
+          <div style="color: rgb(170, 170, 170); font-weight: 700;">{{cellInfo.value.email}}</div>
+        </div>
+        
+    </dx-data-grid>
+  
+  </div>

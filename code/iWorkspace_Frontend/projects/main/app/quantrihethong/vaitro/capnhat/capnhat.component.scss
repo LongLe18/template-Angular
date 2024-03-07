@@ -1,0 +1,102 @@
+@use "../../../../variables.scss" as *;
+
+:host {
+  --left-panel-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+
+  .view-wrapper-scroll {
+    background-color: rgb(246, 249, 254);
+    // background-color: var(--card-background);
+    width: 100%;
+    // margin-top: calc(var(--content-padding) / 2);
+    // max-height: calc(100% - var(--toolbar-height));
+    ::ng-deep .dx-button.dx-button-default {
+      background-color: var(--btn-default);
+      height: 30px;
+    }
+    
+    ::ng-deep .dx-button.dx-button-default.dx-state-hover {
+      background-color: var(--hover-btn-default);
+    }
+
+    ::ng-deep .dx-selection {
+      background-color: transparent;
+    }
+
+    ::ng-deep .border-custom {
+      height: 100%;
+      border-left: 1px solid rgb(226, 229, 229);
+    }
+
+    ::ng-deep .dx-treelist-rowsview {
+      border: none;
+    }
+  }
+}
+
+::ng-deep .dx-scrollview-content {
+  height: 100%;
+}
+
+::ng-deep .dx-form-group-with-caption > .dx-form-group-content {
+  border: none;
+}
+
+::ng-deep .dx-field-item-label-text {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  color: #000000;
+}
+
+::ng-deep .dx-field-item-label-location-top {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.dx-toolbar ::ng-deep {
+  margin-bottom: calc(var(--toolbar-margin-bottom) / 2);
+
+  .dx-toolbar-label > div {
+    @include header();
+  }
+}
+
+.view-wrapper {
+  height: 100%;
+
+  .grid {
+    margin: var(--content-padding);
+    margin-bottom: 0;
+    height: 100%;
+    .panel {
+      // height: 100%;
+      overflow-y: scroll;
+      height: calc(100% - var(--toolbar-height) * 2);
+      padding: 16px;
+      border: 1px solid rgb(226, 229, 229);
+      background-color: #fff;
+      border-radius: 3px;
+      
+      .form-container {
+        width: 100%;
+      }
+    }
+    // .panel:hover {
+    //   overflow-y: scroll;
+    // }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(226, 229, 229); 
+  border-radius: 10px;
+}

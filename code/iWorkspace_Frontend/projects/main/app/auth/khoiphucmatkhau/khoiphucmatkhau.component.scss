@@ -1,0 +1,41 @@
+@use "../../../variables" as *;
+
+.reset-password-form {
+  ::ng-deep .submit-button {
+    margin-top: 18px;
+  }
+
+  ::ng-deep .dx-button.dx-button-warning {
+    background-color: #fb973f;
+  }
+
+  ::ng-deep .dx-field-item-label-text {
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: #000000;
+  }
+
+  ::ng-deep .dx-field-item-label-location-top {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .dx-button-text {
+    font-weight: 400;
+    font-size: 16px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  a {
+    cursor: pointer;
+  }
+
+  .login-link {
+    color: var(--accent-color);
+    font-size: 14px;
+    text-align: center;
+    margin-top: 6px;
+  }
+}

@@ -1,0 +1,88 @@
+<header>
+  <dx-toolbar class="header-toolbar">
+    <dxi-item
+      *ngIf="menuToggleEnabled"
+      location="before"
+      widget="dxButton"
+      cssClass="menu-button"
+      [options]="{
+        icon: 'menu',
+        stylingMode: 'text',
+        onClick: toggleMenu
+      }"
+    >
+    </dxi-item>
+
+    <dxi-item
+      location="before"
+      cssClass="logo-button"
+      [options]="{
+        icon: logo,
+        stylingMode: 'text',
+      }"
+      widget="dxButton"
+    >
+    </dxi-item>
+
+    <dxi-item
+      location="before"
+      cssClass="header-title"
+      *ngIf="title"
+      [text]="title"
+    >
+    </dxi-item>
+
+    <!-- <dxi-item
+      location="after"
+      widget="dxTextBox"
+      locateInMenu="auto"
+      cssClass="global-search-box"
+      [options]="{
+        stylingMode: 'underlined',
+        mode: 'search',
+        placeholder: 'placeholderSearch' | translate,
+        width: 180
+      }"
+    >
+    </dxi-item> -->
+
+    <!-- <dxi-item location="after" locateInMenu="never">
+      <ng-container *dxTemplate>
+        <theme-switcher></theme-switcher>
+      </ng-container>
+    </dxi-item> -->
+
+    <!-- Đổi ngôn ngữ -->
+    <!-- <dxi-item location="after" locateInMenu="never" menuItemTemplate="menuItem">
+        <ng-container *dxTemplate>
+          <languages-menu [menuItems]="locales"></languages-menu>
+        </ng-container>
+    </dxi-item> -->
+
+    <!-- Bagde -->
+    <dxi-item location="after">
+      <div *dxTemplate>
+        <notification-dropdown
+          [items]="notificationsItems"
+        ></notification-dropdown>
+      </div>
+    </dxi-item>
+
+    <dxi-item location="after" locateInMenu="auto" menuItemTemplate="menuItem">
+      <div *dxTemplate="let data of 'item'">
+        <user-panel
+          [user]="user"
+          [menuItems]="userMenuItems"
+          menuMode="context"
+        ></user-panel>
+      </div>
+    </dxi-item>
+    <div *dxTemplate="let data of 'menuItem'">
+      <user-panel
+        [user]="user"
+        [menuItems]="userMenuItems"
+        menuMode="list"
+      ></user-panel>
+    </div>
+  </dx-toolbar>
+</header>

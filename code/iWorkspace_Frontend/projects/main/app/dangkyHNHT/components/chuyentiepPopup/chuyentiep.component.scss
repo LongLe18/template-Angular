@@ -1,0 +1,59 @@
+@use "../../../../variables.scss" as *;
+
+@include separator();
+
+dx-data-grid {
+  ::ng-deep .chuyentiep-popup & {
+    height: var(--change-password-popup-height, auto);
+
+    .dx-link {
+      color: rgb(2, 125, 180);
+      font-weight: 400 !important;
+      text-decoration: underline !important;
+    }
+  }
+}
+
+::ng-deep .chuyentiep-popup .dx-tabpanel-tabs {
+  margin-bottom: 8px;
+  .dx-tab.dx-tab-selected {
+    color: #000
+  }
+}
+
+
+
+::ng-deep .chuyentiep-popup .dx-popup-normal {
+  border-radius: 8px;
+  padding: 8px 0;
+
+  .dx-toolbar {
+    // padding: 0 24px 8px;
+  }
+}
+
+.grid-popup-chuyentiep {
+  ::ng-deep .dx-header-row {
+    background-color: transparent;
+    .dx-datagrid-text-content {
+      font-weight: 600;
+      font-size: 14px;
+      color: #000;
+    }
+    .dx-header-filter {
+      color: #000;
+    }
+
+    
+  }
+  ::ng-deep .dx-datagrid-headers {
+    border: none;
+  }
+  ::ng-deep .dx-datagrid-headers .dx-datagrid-table .dx-row > td:hover:not(.dx-command-select):not(.dx-command-expand):not(.dx-editor-cell):not(.dx-command-edit):not(.dx-datagrid-group-space) {
+    background-color: transparent;
+  }
+
+  ::ng-deep .dx-datagrid-headers .dx-datagrid-table .dx-row > td {
+    border: none;
+  }
+}

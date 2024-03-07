@@ -1,0 +1,20 @@
+<dx-scroll-view
+  height="100%"
+  width="100%"
+  class="view-wrapper-scroll single-card"
+>
+  <div class="auth-card">
+    <div class="dx-card content">
+      <div class="header">
+        <img alt="logo" id="u18_img" class="img " src="{{logo}}" />
+        <div class="title">{{ title }}</div>
+        <div class="name">
+          <p><span>HỆ THỐNG <br/> QUẢN LÝ THỦ TỤC HÀNH CHÍNH</span></p>
+        </div>
+        <div class="description">{{ description }}</div>
+      </div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+  
+</dx-scroll-view>

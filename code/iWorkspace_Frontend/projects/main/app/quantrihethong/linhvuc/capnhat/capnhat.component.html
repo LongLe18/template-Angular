@@ -1,0 +1,70 @@
+<dx-scroll-view class="view-wrapper-scroll">
+    <div class="view-wrapper">
+    <breadcrumb [label]="hasParameter ? ('editfield' | translate) : ('addfield' | translate)" [link]="linkBreadCrumb"></breadcrumb>
+      <div class="grid">
+  
+        <div class="panel">
+          <div class="form-container">
+            <dx-form
+              [formData]="data"
+              [disabled]="isLoading"
+              [showColonAfterLabel]="true"
+            >
+              <dxi-item 
+                dataField="tenLinhVuc" 
+                isRequired="true" 
+              >
+                  <dxo-label [text]="'nameField' | translate"></dxo-label>
+                  <dxi-validation-rule
+                    type="required"
+                    [message]="'fieldRequire' | translate"
+                  ></dxi-validation-rule>
+              </dxi-item>
+              <dxi-item 
+                dataField="thuTu" 
+                isRequired="true" 
+                editorType="dxNumberBox"
+                >
+                  <dxo-label [text]="'stt' | translate"></dxo-label>
+                  <dxi-validation-rule
+                    type="required"
+                    [message]="'fieldRequire' | translate"
+                  ></dxi-validation-rule>
+                  <dxi-validation-rule 
+                    type="numeric" 
+                    [message]="'fieldValidation' | translate"
+                  >
+                  </dxi-validation-rule>
+              </dxi-item>
+              <dxi-item 
+                dataField="moTa" 
+                editorType="dxTextArea"
+                [editorOptions]="{height: 90, maxLength: 200}" >
+                  <dxo-label [text]="'dxScheduler-editorLabelDescription' | translate"></dxo-label>
+              </dxi-item>
+              <dxi-item 
+                dataField="trangThai" 
+                editorType="dxCheckBox"
+                [editorOptions]="{text: 'active2' | translate}" >
+                  <dxo-label location="left" [text]="'status' | translate"></dxo-label>
+              </dxi-item>
+            </dx-form>
+          </div>
+        </div>
+  
+        <corner-button [items]="listCornerBtn"></corner-button>
+      </div>
+      <dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [position]="{ of: '.view-wrapper' }"
+        [(visible)]="isLoading"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [hideOnOutsideClick]="false"
+      >
+      </dx-load-panel>
+    </div>
+  </dx-scroll-view>
+  

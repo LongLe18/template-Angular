@@ -1,0 +1,79 @@
+@use "../../../../../../variables.scss" as *;
+
+:host {
+  flex: 0 0 auto;
+  z-index: 5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05), 0 0 4px rgba(0, 0, 0, 0.15);
+}
+
+header {
+  padding: var(--header-toolbar-vertical-padding) 0;
+  background-color: rgba(47, 158, 68, 1);
+
+  ::ng-deep .header-title {
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    max-width: 280px !important;
+    div {
+      white-space: normal;
+    }
+  }
+
+  .header-toolbar {
+    padding-right: var(--content-padding);
+    background-color: var(--base-bg);
+    
+    ::ng-deep .global-search-box {
+      padding-right: 11px;
+      input, ::placeholder {
+        color: var(--base-focus-color);
+      }
+    }
+
+    ::ng-deep .dx-icon-belloutline {
+      color: var(--base-focus-color);
+    }
+
+    .messages {
+      position: relative;
+
+      @media only screen and (max-width: 600px) {
+        display: none;
+      }
+
+      .dx-badge {
+        display: block;
+        position: absolute;
+        background-color: red;
+        color: white;
+        right: -10%;
+        top: -10%;
+        font-size: 12px;
+        padding: 0 4px;
+      }
+    }
+
+    ::ng-deep .dx-toolbar-item.menu-button {
+      width: var(--side-panel-min-width);
+      text-align: center;
+      padding: 0;
+
+      .dx-icon {
+        color: #fff;
+      }
+    }
+
+    ::ng-deep .dx-toolbar-item.logo-button {
+      width: 36px;
+      text-align: center;
+      padding: 0 12px 0 0;
+
+      .dx-icon {
+        color: #fff;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

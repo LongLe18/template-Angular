@@ -1,0 +1,86 @@
+<dx-scroll-view class="view-wrapper-scroll">
+    <div class="view-wrapper">
+      <breadcrumb [label]="'addmenu' | translate" [link]="linkBreadCrumb"></breadcrumb>
+      <div class="grid">
+      <!-- <dx-toolbar class="toolbar-details">
+        <dxi-item location="before" [text]="'addmenu' | translate"></dxi-item>
+        <dxi-item
+          location="after"
+          locateInMenu="auto"
+          widget="dxButton"
+          showText="inMenu"
+          [options]="{
+            text: 'Refresh',
+            icon: 'refresh',
+            onClick: refresh,
+            stylingMode: 'text'
+          }"
+        ></dxi-item>
+      </dx-toolbar> -->
+  
+      <div class="panel">
+        <div class="form-container">
+          <dx-form
+            [formData]="formData"
+            [disabled]="isLoading"
+            [showColonAfterLabel]="true"
+          >
+            <dxi-item 
+              dataField="tenChucNang" 
+              isRequired="true" 
+               >
+                <dxo-label [text]="'namechucnang' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="chucNangChaID" 
+              editorType="dxSelectBox"
+              [editorOptions]="parentFunctionEditorOptions"
+            >
+                <dxo-label [text]="'parentnhucnang' | translate"></dxo-label>
+            </dxi-item>
+            <dxi-item 
+              dataField="url" 
+              isRequired="true" 
+               >
+                <dxo-label text="Url"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="thuTu" 
+              isRequired="true" 
+              editorType="dxNumberBox"
+               >
+                <dxo-label [text]="'stt' | translate"></dxo-label>
+                <dxi-validation-rule
+                  type="required"
+                  [message]="'fieldRequire' | translate"
+                ></dxi-validation-rule>
+                <dxi-validation-rule 
+                  type="numeric" 
+                  [message]="'fieldValidation' | translate"
+                >
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item 
+              dataField="vaiTro" 
+              editorType="dxTagBox"
+              [editorOptions]="vaiTroOptions"
+            >
+              <dxo-label [text]="'role' | translate"></dxo-label>
+          </dxi-item>
+          </dx-form>
+        </div>
+      </div>
+  
+      <corner-button [items]="listCornerBtn"></corner-button>
+      </div>
+    </div>
+  </dx-scroll-view>
+  

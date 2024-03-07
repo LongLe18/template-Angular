@@ -1,0 +1,127 @@
+<dx-scroll-view class="view-wrapper-scroll">
+    <div class="view-wrapper">
+      <breadcrumb [label]="'processingDoc' | translate" [link]="linkBreadCrumb"></breadcrumb>
+      <div class="grid">
+        
+          <div class="panel">
+            <div class="info-basic-hoso">
+                <div class="left-col">
+                    <div class="title mb-12">{{'sender' | translate}}: </div>
+                    <div class="title mt-12 mb-12">{{'timesending' | translate}}: </div>
+                    <div class="title mt-12 mb-12">{{'procedure2' | translate}}: </div>
+                    <div class="title mt-12 mb-12">{{'field2' | translate}}: </div>
+                    <div class="title mt-12 mb-12">{{'dxScheduler-editorLabelDescription' | translate}}: </div>
+                    <div class="title mt-12 mb-12">{{'attachDocument' | translate}} </div>
+                     
+                </div>
+                <div class="right-col">
+                    <div class="value mb-12">{{data.nguoiGui}}</div>
+                    <div class="value mt-12 mb-12">{{data.thoiGianDK | date: 'dd/MM/yyyy'}}</div>
+                    <div class="value mt-12 mb-12">{{data.thuTuc}}</div>
+                    <div class="value mt-12 mb-12">{{data.linhVuc}}</div>
+                    <div class="value mt-12 mb-12">{{data.moTa}}</div>
+                </div>
+            </div>
+            <dx-data-grid
+                class="gridxulyhoso"
+                noDataText=""
+                [dataSource]="bieuMau"
+                [allowColumnReordering]="true"
+                [columnAutoWidth]="true"
+                [showBorders]="true"
+            >   
+                <dxo-load-panel [showPane]="false"></dxo-load-panel>
+                <dxo-scrolling rowRenderingMode="virtual"></dxo-scrolling>
+                <dxo-sorting mode="none"></dxo-sorting>
+        
+                <!-- Defined Columns -->
+                <dxi-column
+                    dataField="stt"
+                    caption="STT"
+                    width="70"
+                    alignment="center"
+                    cellTemplate="sttEditor"
+                ></dxi-column>
+                <dxi-column
+                    dataField="tenHoSo"
+                    [caption]="'nameDocument' | translate"
+                ></dxi-column>
+                
+                <dxi-column
+                    dataField="file"
+                    cellTemplate="downloadform"
+                    [caption]="'attachDocument2' | translate"
+                ></dxi-column>
+            
+                
+                <div *dxTemplate="let cellInfo of 'downloadform'">
+                    <a target="_blank" download [href]="cellInfo.value.url"> <img src="assets/icons/download.svg" alt="download" style="margin-right: 4px;"/>{{cellInfo.value.label}}</a>
+                </div>
+
+                <div *dxTemplate="let cellInfo of 'sttEditor'">
+                    <div>{{cellInfo.row.rowIndex + 1}}</div>
+                </div>
+                
+            </dx-data-grid>
+
+            <div class="form-comment">
+                <dx-form class="form"
+                    [formData]="formData"
+                    [disabled]="isLoading"
+                    [showColonAfterLabel]="true"
+                >
+                    <dxi-item 
+                        dataField="yKien" 
+                    >
+                        <dxo-label [text]="'commentHandling' | translate"></dxo-label>
+                        <div style="display: flex; width: 100%;">
+                            <dx-text-box style="width: 80%; margin-right: 8px;"></dx-text-box>
+                            <dx-button [text]="'processHandle' | translate" class="btn-view"
+                                [hint]="'processHandle' | translate" 
+                                type="success"
+                                (onClick)="viewProcessingProcedure()"
+                            ></dx-button>
+                        </div>
+                    </dxi-item>
+    
+                    <dxi-item 
+                        dataField="file" 
+                    >
+                        <dxo-label [text]="'attachFile' | translate"></dxo-label>
+                        <dx-file-uploader [multiple]="true" (onValueChanged)="onUploadFileChanged($event)"
+                            uploadMode="useButtons">
+                        </dx-file-uploader>
+                    </dxi-item>
+                </dx-form>
+                
+            </div>
+
+        </div>
+        
+        <corner-button [items]="listCornerBtn"></corner-button>
+      </div>
+    </div>
+  </dx-scroll-view>
+  <dx-load-panel
+    #loadPanel
+    shadingColor="rgba(0,0,0,0.4)"
+    [position]="{ of: '.view-wrapper' }"
+    [(visible)]="isLoading"
+    [showIndicator]="true"
+    [showPane]="true"
+    [shading]="true"
+    [hideOnOutsideClick]="false"
+    >
+    </dx-load-panel>
+
+<chuyentiep-popup
+    [(visible)]="isForwardPopupOpened"
+    [forWard]="{visible: true, onHandle: onForward}"
+    [data]="dataNhanSu"
+></chuyentiep-popup>
+
+<quatrinhxulyHoSo-popup
+      [(visible)]="isProcessingProcedurePopupOpened"
+      [data]="dataThuTuc"
+      [dataVersion]="dataPhienBan"
+></quatrinhxulyHoSo-popup>

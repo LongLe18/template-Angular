@@ -1,0 +1,256 @@
+@use "../../../../variables.scss" as *;
+
+:host {
+  --left-panel-width: 400px;
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+
+  .view-wrapper-scroll {
+    background-color: rgb(246, 249, 254);
+    width: 100%;
+    // margin-top: calc(var(--content-padding) / 2);
+    // max-height: calc(100% - var(--toolbar-height));
+    
+    ::ng-deep .dx-scrollview-content {
+      height: 100%;
+    }
+
+    ::ng-deep .dx-button.dx-button-default, .dx-selection {
+      background-color: var(--btn-default);
+      height: 30px;
+    }
+
+    ::ng-deep .dx-button.dx-button-default.dx-state-hover {
+      background-color: var(--hover-btn-default);
+    }
+  }
+}
+
+::ng-deep .dx-field-item-label-text {
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  color: #000000;
+}
+
+::ng-deep .dx-field-item-label-location-top {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.dx-toolbar ::ng-deep {
+  margin-bottom: calc(var(--toolbar-margin-bottom) / 2);
+
+  .dx-toolbar-label > div {
+    @include header();
+  }
+}
+
+.view-wrapper {
+  // padding: var(--content-padding) var(--content-padding) 0 var(--content-padding);
+  height: 100%;
+
+  .grid-dktthc {
+    margin: var(--content-padding);
+    margin-bottom: 0;
+    height: 100%;
+    
+    .panel {
+      overflow-y: scroll;
+      height: calc(100% - 100px);
+      padding: 16px;
+      border: 1px solid rgb(226, 229, 229);
+      background-color: #fff;
+      border-radius: 3px;
+
+      @media only screen and (max-width: 1200px) {
+        flex-direction: column;
+      }
+
+      .form-container-dktthc {
+        .no-padding {
+          ::ng-deep .dx-fileuploader-wrapper {
+            padding: 0;
+          }
+        }
+
+        ::ng-deep .dx-layout-manager .dx-field-item:not(.dx-first-row) {
+          padding-top: 0px;
+        }
+
+        ::ng-deep .dx-layout-manager .dx-tabpanel .dx-multiview-item-content {
+          padding: 12px 0;
+        }
+
+        ::ng-deep & {
+          .dx-form-group {
+            padding-top: 4px;
+
+            .dx-form-group-caption {
+              font-size: 14px;
+              font-weight: 500;
+              color: #000;
+              padding-top: 4px;
+            }
+
+            .dx-form-group-content {
+              border: none;
+            }
+
+          }
+          .dx-header-row {
+            background-color: rgba(215, 215, 215, 0.996);
+            .dx-datagrid-text-content {
+              font-weight: 600;
+              font-size: 14px;
+              color: #000;
+            }
+            .dx-header-filter {
+              color: #000;
+            }
+          }
+          
+        }
+      }
+    }
+
+    .form-comment {
+        // border: 1px solid rgb(226, 229, 229);
+        // padding: 4px 32px;
+
+        .btn-view {
+            background-color: transparent;
+            box-shadow: none;
+            color: rgb(0, 149, 216);
+            text-decoration: underline;
+            ::ng-deep .dx-button-text {
+                font-style: normal;
+                font-weight: 500px !important;
+                font-size: 14px !important;
+                text-transform: none !important;
+            }
+        }
+    }
+
+    .corner-button-custom {
+      // width: 85%;
+      border-top: 1px solid #e7dcdc;
+      position: sticky;
+      bottom: 0px;
+      border: 1px solid rgb(213, 217, 217); 
+      background-color: rgba(255, 255, 255, 1);
+      padding: 12px 0px 0 12px;
+
+      .buttonUp {
+        position: absolute;
+        top: -28px;
+        left: 0;
+        border-radius: 0%;
+        background-color: rgba(47, 158, 68, 1);
+        ::ng-deep .dx-icon-chevronup {
+          color: #fff;
+        }
+
+        ::ng-deep .dx-icon-chevrondown {
+          color: #fff;
+        }
+      }
+
+      .item-button {
+          padding: 8px 0px 8px 16px;
+          text-align: center;
+          width: 100%;
+          display: flex;
+          // justify-content: space-around;
+  
+          ::ng-deep .dx-button {
+              margin-right: 16px;
+              padding: 0 !important;
+          }
+          
+          @media only screen and (max-width: 800px) {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+  
+              ::ng-deep .dx-button {
+                  margin-bottom: 4px;
+              }
+          }
+  
+          ::ng-deep .dx-button-text {
+              font-weight: 400;
+              font-style: normal;
+          }
+  
+          ::ng-deep .dx-button-normal {
+              padding: 0 !important;
+              border: 1px solid rgb(52, 192, 89);
+              box-shadow: none;
+              height: 30px;
+          }
+  
+          ::ng-deep .dx-button-primary {
+              padding: 0 !important;
+              border: 1px solid rgba(112, 182, 3, 1);
+              box-shadow: none;
+              background: rgba(112, 182, 3, 1);
+              height: 30px;
+              ::ng-deep .dx-button-text {
+                  color: white;
+              }
+          }
+  
+          ::ng-deep .dx-button-secondary {
+              padding: 0 !important;
+              border: 1px solid rgba(0, 0, 191, 1);
+              box-shadow: none;
+              background: rgba(0, 0, 191, 1);
+              height: 30px;
+              ::ng-deep .dx-button-text {
+                  color: white;
+              }
+  
+              ::ng-deep .dx-icon-isblank {
+                  color: white;
+              }
+          }
+  
+          ::ng-deep .dx-button-thirdary {
+              padding: 0 !important;
+              border: 1px solid rgba(1, 84, 120, 1);
+              box-shadow: none;
+              background: rgba(1, 84, 120, 1);
+              height: 30px;
+              ::ng-deep .dx-button-text {
+                  color: white;
+              }
+  
+              ::ng-deep .dx-icon-plus {
+                  color: white;
+              }
+          }
+  
+          ::ng-deep .dx-button-has-text .dx-button-content {
+              overflow: visible;
+          }
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(226, 229, 229); 
+  border-radius: 10px;
+}
+
+.hidden {
+  display: none;
+}

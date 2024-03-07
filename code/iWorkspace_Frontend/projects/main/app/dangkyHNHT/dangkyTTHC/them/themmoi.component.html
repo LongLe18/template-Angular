@@ -1,0 +1,568 @@
+<dx-scroll-view class="view-wrapper-scroll">
+  <div class="view-wrapper">
+    <breadcrumb [label]="'registerConference' | translate" [link]="linkBreadCrumb"></breadcrumb>
+    <div class="grid-dktthc">
+  
+      <div class="panel">
+        <div class="form-container-dktthc">
+          <dx-form
+            [formData]="formData"
+            [disabled]="isLoading"
+            [showColonAfterLabel]="true"
+          >
+            <dxi-item 
+              dataField="tenHoiThao" 
+              isRequired="true" 
+            >
+              <dxo-label [text]="'projectName' | translate"></dxo-label>
+              <dxi-validation-rule
+                type="required"
+                [message]="'fieldRequire' | translate"
+              ></dxi-validation-rule>
+            </dxi-item>
+
+            <!-- Tab -->
+            <dxi-item itemType="tabbed">
+              <dxo-tab-panel-options [deferRendering]="false"></dxo-tab-panel-options>
+              
+              <dxi-tab [title]="'reasonpurpose' | translate">
+                <dxi-item 
+                  dataField="lyDo" 
+                  isRequired="true" 
+                >
+                  <dxo-label [text]="'contextReason' | translate"></dxo-label>
+                  <dxi-validation-rule
+                    type="required"
+                    [message]="'fieldRequire' | translate"
+                  ></dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item 
+                  dataField="mucDich" 
+                  isRequired="true" 
+                >
+                  <dxo-label [text]="'resultpurpose' | translate"></dxo-label>
+                  <dxi-validation-rule
+                    type="required"
+                    [message]="'fieldRequire' | translate"
+                  ></dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item itemType="group" [caption]="'nameorganization' | translate">
+                  <dxi-item 
+                    dataField="donViID" 
+                    isRequired="true" 
+                    editorType="dxSelectBox"
+                    [editorOptions]="toChucEditorOptions"
+                  >
+                    <dxo-label [text]="'Organizationalunits' | translate"></dxo-label>
+                    <dxi-validation-rule
+                      type="required"
+                      [message]="'fieldRequire' | translate"
+                    ></dxi-validation-rule>
+                  </dxi-item>
+
+                  <dxi-item 
+                    dataField="donViDongToChuc" 
+                  >
+                    <dxo-label [text]="'coorganization' | translate"></dxo-label>
+                    <coquan [items]="coOrganizationItems" 
+                      [titleBtn]="'addOrganizationAndPosition'" 
+                      [selectBoxData]="selectBoxDataCoQuan"
+                    >
+                    </coquan>
+                  </dxi-item>
+                </dxi-item>
+
+              </dxi-tab>
+
+              <dxi-tab [title]="'infoConference' | translate">
+
+                <dxi-item itemType="group" [caption]="'timelocation' | translate" [colCount]="2">
+
+                  <dxi-item 
+                    dataField="fromDate" 
+                    isRequired="true" 
+                    editorType="dxDateBox"
+                    [editorOptions]="{placeholder: 'dd/mm/yyyy'}"
+                  >
+                    <dxo-label [text]="'fromDate' | translate"></dxo-label>
+                    <dxi-validation-rule
+                      type="required"
+                      [message]="'fieldRequire' | translate"
+                    ></dxi-validation-rule>
+                  </dxi-item>
+
+                  <dxi-item 
+                    dataField="toDate" 
+                    isRequired="true" 
+                    editorType="dxDateBox"
+                    [editorOptions]="{placeholder: 'dd/mm/yyyy'}"
+                  >
+                    <dxo-label [text]="'toDate' | translate"></dxo-label>
+                    <dxi-validation-rule
+                      type="required"
+                      [message]="'fieldRequire' | translate"
+                    ></dxi-validation-rule>
+                  </dxi-item>
+
+                  <dxi-item 
+                      dataField="diaDiemID" 
+                      isRequired="true" 
+                      editorType="dxSelectBox"
+                      [editorOptions]="diadiemEditorOptions"
+                      [colSpan]="2"
+                    >
+                      <dxo-label [text]="'place' | translate"></dxo-label>
+                      <dxi-validation-rule
+                        type="required"
+                        [message]="'fieldRequire' | translate"
+                      ></dxi-validation-rule>
+                  </dxi-item>
+
+                </dxi-item>
+
+                <dxi-item itemType="group" [caption]="'placeVisit' | translate" [colCount]="2">
+
+                  <dxi-item 
+                    dataField="moTaDiaDiem" 
+                    isRequired="true" [colSpan]="2"
+                  >
+                    <dxo-label [text]="'infoplace' | translate"></dxo-label>
+                    <dxi-validation-rule
+                      type="required"
+                      [message]="'fieldRequire' | translate"
+                    ></dxi-validation-rule>
+                  </dxi-item>
+
+                </dxi-item>
+
+                <dxi-item itemType="group" [caption]="'formandtech' | translate" [colCount]="2">
+
+                  <dxi-item 
+                    dataField="loaiHoiThaoID" 
+                    [editorOptions]="loaiHoiThaoEditorOptions"
+                    editorType="dxSelectBox"
+                    isRequired="true"
+                  >
+                    <dxo-label [text]="'conferenceFormat' | translate"></dxo-label>
+                    <dxi-validation-rule
+                      type="required"
+                      [message]="'fieldRequire' | translate"
+                    ></dxi-validation-rule>
+                  </dxi-item>
+                  
+                  <dxi-item *ngIf="isOnline"
+                    dataField="congNgheID" 
+                    [editorOptions]="congNgheEditorOptions"
+                    editorType="dxSelectBox"
+                    isRequired="true"
+                  >
+                    <dxo-label [text]="'organizationTech' | translate"></dxo-label>
+                    <dxi-validation-rule
+                      type="required"
+                      [message]="'fieldRequire' | translate"
+                    ></dxi-validation-rule>
+                  </dxi-item>
+                  
+                </dxi-item>
+
+                <dxi-item itemType="group" [caption]="'participatingOrganization' | translate">
+
+                  <dxi-item 
+                    dataField="banToChuc"
+                  >
+                    <dxo-label [text]="'organizingCommittee' | translate"></dxo-label>
+                    <coquan [items]="ingredientsItems" [titleBtn]="'addIngredient'"></coquan>
+                  </dxi-item>
+
+                  <dxi-item 
+                    dataField="banThuKy"
+                  >
+                    <dxo-label [text]="'secretariat' | translate"></dxo-label>
+                    <coquan [items]="ingredientsItems" [titleBtn]="'addIngredient'"></coquan>
+                  </dxi-item>
+
+                  <dxi-item 
+                    dataField="banChuyenMon"
+                  >
+                    <dxo-label [text]="'expertCommittee' | translate"></dxo-label>
+                    <coquan [items]="ingredientsItems" [titleBtn]="'addIngredient'" ></coquan>
+                  </dxi-item>
+
+                  <dxi-item 
+                    dataField="coQuanTaiTro"
+                  >
+                    <dxo-label [text]="'sponsor' | translate"></dxo-label>
+                    <coquan [items]="sponsorItems" [titleBtn]="'addIngredient'" [selectBoxData]="selectBoxDataCoQuan"></coquan>
+                  </dxi-item>
+
+                </dxi-item>
+
+                <dxi-item itemType="group" [caption]="'expectNumbers' | translate"  [colCount]="2">
+
+                    <dxi-item 
+                      dataField="duKienSLVN" 
+                      editorType="dxNumberBox"
+                      [editorOptions]="{showSpinButtons: true}"
+                    >
+                      <dxo-label [text]="'representativeVN' | translate"></dxo-label>
+                      <dxi-validation-rule 
+                        type="numeric" 
+                        [message]="'fieldValidation' | translate"
+                      >
+                      </dxi-validation-rule>
+                    </dxi-item>
+                    
+                    <dxi-item 
+                      dataField="duKienSLNN" 
+                      editorType="dxNumberBox"
+                      [editorOptions]="{showSpinButtons: true}"
+                    >
+                      <dxo-label [text]="'representativeNN' | translate"></dxo-label>
+                      <dxi-validation-rule 
+                        type="numeric" 
+                        [message]="'fieldValidation' | translate"
+                      >
+                      </dxi-validation-rule>
+                    </dxi-item>
+
+                </dxi-item>
+
+                <dxi-item 
+                  dataField="thanhPhanNN"
+                >
+                  <dxo-label [text]="'infoDelegates' | translate"></dxo-label>
+                  <coquan [items]="infoReporterItems" [titleBtn]="'addDelegates'"></coquan>
+                </dxi-item>
+
+              </dxi-tab>
+
+              <dxi-tab [title]="'contentConference' | translate">
+                <dxi-item 
+                  dataField="tomTat" 
+                  isRequired="true" 
+                >
+                  <dxo-label [text]="'summary' | translate"></dxo-label>
+                  <dxi-validation-rule
+                    type="required"
+                    [message]="'fieldRequire' | translate"
+                  ></dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item 
+                  dataField="tomTat" 
+                >
+                  <dxo-label [text]="'attachFile' | translate"></dxo-label>
+                  <dx-file-uploader [multiple]="true"  (onValueChanged)="onUploadFileChanged($event)"
+                    uploadMode="useButtons">
+                  </dx-file-uploader>
+                  <div style="font-size: 14px;font-weight: 400;color: red; padding-left: 7px;">(Chỉ được đính kèm file .doc, .docx, .pdf)</div>
+                </dxi-item>
+
+                <!-- <dxi-item>
+                  <dx-data-grid
+                    class="grid"
+                    keyExpr="guid"
+                    [showBorders]="true"
+                  >   
+                    <dxo-editing mode="row" 
+                      [allowUpdating]="true" 
+                      [allowDeleting]="true" 
+                      [useIcons]="true"
+                    > 
+                    </dxo-editing>
+                    <dxo-sorting mode="none"></dxo-sorting>
+
+                    <dxi-column
+                      caption="STT"
+                      width="70"
+                      cellTemplate="sttEditor"
+                      [allowEditing]="false"
+                      alignment="center"
+                    ></dxi-column>
+
+                    <dxi-column
+                      [caption]="'filename' | translate"
+                      dataField="tenFile"
+                    ></dxi-column>
+
+                    <dxi-column type="buttons" [width]="110" [caption]="'action' | translate">
+                      <dxi-button icon='download' 
+                        hint="Download file" 
+                        type="success"
+                      ></dxi-button>
+                      <dxi-button name="delete" [hint]="'dxDataGrid-editingDeleteRow' | translate"></dxi-button>
+                    </dxi-column>
+                    
+                    <div *dxTemplate="let cellInfo of 'sttEditor'">
+                      <div>{{cellInfo.row.rowIndex + 1}}</div>
+                    </div>
+
+                  </dx-data-grid>
+                </dxi-item> -->
+
+              </dxi-tab>
+
+              <dxi-tab [title]="'sidactivities' | translate">
+                <dxi-item 
+                    dataField="hoatDongBenLe" 
+                  >
+                    <dxo-label [text]="'infoactivitites' | translate"></dxo-label>
+                    <dx-html-editor height="725px" >
+                      <dxo-toolbar [multiline]="false">
+                        <dxi-item name="undo"></dxi-item>
+                        <dxi-item name="redo"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item
+                          name="size"
+                          [acceptedValues]="['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt']"
+                          [options]="{ inputAttr: { 'aria-label': 'Font size' } }"
+                        ></dxi-item>
+                        <dxi-item
+                          name="font"
+                          [acceptedValues]="[
+                            'Arial',
+                            'Courier New',
+                            'Georgia',
+                            'Impact',
+                            'Lucida Console',
+                            'Tahoma',
+                            'Times New Roman',
+                            'Verdana'
+                          ]"
+                          [options]="{ inputAttr: { 'aria-label': 'Font family' } }"
+                        ></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="bold"></dxi-item>
+                        <dxi-item name="italic"></dxi-item>
+                        <dxi-item name="strike"></dxi-item>
+                        <dxi-item name="underline"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="alignLeft"></dxi-item>
+                        <dxi-item name="alignCenter"></dxi-item>
+                        <dxi-item name="alignRight"></dxi-item>
+                        <dxi-item name="alignJustify"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="orderedList"></dxi-item>
+                        <dxi-item name="bulletList"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item
+                          name="header"
+                          [acceptedValues]="[false, 1, 2, 3, 4, 5]"
+                          [options]="{ inputAttr: { 'aria-label': 'Header' } }"
+                        ></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="color"></dxi-item>
+                        <dxi-item name="background"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="link"></dxi-item>
+                        <dxi-item name="image"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="clear"></dxi-item>
+                        <dxi-item name="codeBlock"></dxi-item>
+                        <dxi-item name="blockquote"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="insertTable"></dxi-item>
+                        <dxi-item name="deleteTable"></dxi-item>
+                        <dxi-item name="insertRowAbove"></dxi-item>
+                        <dxi-item name="insertRowBelow"></dxi-item>
+                        <dxi-item name="deleteRow"></dxi-item>
+                        <dxi-item name="insertColumnLeft"></dxi-item>
+                        <dxi-item name="insertColumnRight"></dxi-item>
+                        <dxi-item name="deleteColumn"></dxi-item>
+                      </dxo-toolbar>
+                      <dxo-media-resizing [enabled]="true"> </dxo-media-resizing>
+                      <dxo-image-upload tabs=" { name: 'Both', value: ['file', 'url'] }," fileUploadMode="base64">
+                      </dxo-image-upload>
+                    </dx-html-editor>
+                    
+                  </dxi-item>
+              </dxi-tab>
+
+              <dxi-tab [title]="'PropagandaPlan' | translate">
+                <dxi-item 
+                    dataField="keHoachTuyenTruyen" 
+                  >
+                    <dxo-label [text]="'infoplan' | translate"></dxo-label>
+                    <dx-html-editor height="725px" >
+                      <dxo-toolbar [multiline]="false">
+                        <dxi-item name="undo"></dxi-item>
+                        <dxi-item name="redo"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item
+                          name="size"
+                          [acceptedValues]="['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt']"
+                          [options]="{ inputAttr: { 'aria-label': 'Font size' } }"
+                        ></dxi-item>
+                        <dxi-item
+                          name="font"
+                          [acceptedValues]="[
+                            'Arial',
+                            'Courier New',
+                            'Georgia',
+                            'Impact',
+                            'Lucida Console',
+                            'Tahoma',
+                            'Times New Roman',
+                            'Verdana'
+                          ]"
+                          [options]="{ inputAttr: { 'aria-label': 'Font family' } }"
+                        ></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="bold"></dxi-item>
+                        <dxi-item name="italic"></dxi-item>
+                        <dxi-item name="strike"></dxi-item>
+                        <dxi-item name="underline"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="alignLeft"></dxi-item>
+                        <dxi-item name="alignCenter"></dxi-item>
+                        <dxi-item name="alignRight"></dxi-item>
+                        <dxi-item name="alignJustify"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="orderedList"></dxi-item>
+                        <dxi-item name="bulletList"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item
+                          name="header"
+                          [acceptedValues]="[false, 1, 2, 3, 4, 5]"
+                          [options]="{ inputAttr: { 'aria-label': 'Header' } }"
+                        ></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="color"></dxi-item>
+                        <dxi-item name="background"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="link"></dxi-item>
+                        <dxi-item name="image"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="clear"></dxi-item>
+                        <dxi-item name="codeBlock"></dxi-item>
+                        <dxi-item name="blockquote"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="insertTable"></dxi-item>
+                        <dxi-item name="deleteTable"></dxi-item>
+                        <dxi-item name="insertRowAbove"></dxi-item>
+                        <dxi-item name="insertRowBelow"></dxi-item>
+                        <dxi-item name="deleteRow"></dxi-item>
+                        <dxi-item name="insertColumnLeft"></dxi-item>
+                        <dxi-item name="insertColumnRight"></dxi-item>
+                        <dxi-item name="deleteColumn"></dxi-item>
+                      </dxo-toolbar>
+                      <dxo-media-resizing [enabled]="true"> </dxo-media-resizing>
+                      <dxo-image-upload tabs=" { name: 'Both', value: ['file', 'url'] }," fileUploadMode="base64">
+                      </dxo-image-upload>
+                    </dx-html-editor>
+                    
+                  </dxi-item>
+              </dxi-tab>
+
+              <dxi-tab [title]="'funding2' | translate">
+                <dxi-item 
+                  dataField="donVi" 
+                  isRequired="true" 
+                >
+                  <dxo-label [text]="'payingUnit' | translate"></dxo-label>
+                  <dxi-validation-rule
+                    type="required"
+                    [message]="'fieldRequire' | translate"
+                  ></dxi-validation-rule>
+                </dxi-item>
+                
+                <dxi-item 
+                    dataField="moTa" 
+                  >
+                  <dxo-label [text]="'infodetail' | translate"></dxo-label>
+                  <dx-html-editor height="725px" >
+                    <dxo-toolbar [multiline]="false">
+                      <dxi-item name="undo"></dxi-item>
+                      <dxi-item name="redo"></dxi-item>
+                      <dxi-item name="separator"></dxi-item>
+                      <dxi-item
+                        name="size"
+                        [acceptedValues]="['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt']"
+                        [options]="{ inputAttr: { 'aria-label': 'Font size' } }"
+                      ></dxi-item>
+                      <dxi-item
+                        name="font"
+                        [acceptedValues]="[
+                          'Arial',
+                          'Courier New',
+                          'Georgia',
+                          'Impact',
+                          'Lucida Console',
+                          'Tahoma',
+                          'Times New Roman',
+                          'Verdana'
+                        ]"
+                        [options]="{ inputAttr: { 'aria-label': 'Font family' } }"
+                      ></dxi-item>
+                      <dxi-item name="separator"></dxi-item>
+                      <dxi-item name="bold"></dxi-item>
+                      <dxi-item name="italic"></dxi-item>
+                      <dxi-item name="strike"></dxi-item>
+                      <dxi-item name="underline"></dxi-item>
+                      <dxi-item name="separator"></dxi-item>
+                      <dxi-item name="alignLeft"></dxi-item>
+                      <dxi-item name="alignCenter"></dxi-item>
+                      <dxi-item name="alignRight"></dxi-item>
+                      <dxi-item name="alignJustify"></dxi-item>
+                      <dxi-item name="separator"></dxi-item>
+                      <dxi-item name="orderedList"></dxi-item>
+                      <dxi-item name="bulletList"></dxi-item>
+                      <dxi-item name="separator"></dxi-item>
+                      <dxi-item
+                        name="header"
+                        [acceptedValues]="[false, 1, 2, 3, 4, 5]"
+                        [options]="{ inputAttr: { 'aria-label': 'Header' } }"
+                      ></dxi-item>
+                      <dxi-item name="separator"></dxi-item>
+                      <dxi-item name="color"></dxi-item>
+                      <dxi-item name="background"></dxi-item>
+                      <dxi-item name="separator"></dxi-item>
+                      <dxi-item name="link"></dxi-item>
+                      <dxi-item name="image"></dxi-item>
+                      <dxi-item name="separator"></dxi-item>
+                      <dxi-item name="clear"></dxi-item>
+                      <dxi-item name="codeBlock"></dxi-item>
+                      <dxi-item name="blockquote"></dxi-item>
+                      <dxi-item name="separator"></dxi-item>
+                      <dxi-item name="insertTable"></dxi-item>
+                      <dxi-item name="deleteTable"></dxi-item>
+                      <dxi-item name="insertRowAbove"></dxi-item>
+                      <dxi-item name="insertRowBelow"></dxi-item>
+                      <dxi-item name="deleteRow"></dxi-item>
+                      <dxi-item name="insertColumnLeft"></dxi-item>
+                      <dxi-item name="insertColumnRight"></dxi-item>
+                      <dxi-item name="deleteColumn"></dxi-item>
+                    </dxo-toolbar>
+                    <dxo-media-resizing [enabled]="true"> </dxo-media-resizing>
+                    <dxo-image-upload tabs=" { name: 'Both', value: ['file', 'url'] }," fileUploadMode="base64">
+                    </dxo-image-upload>
+                  </dx-html-editor>
+                    
+                </dxi-item>
+
+              </dxi-tab>
+
+              <dxi-tab [title]="'document' | translate">
+                <dxi-item>
+                  <coquan [items]="attachDocumentItems" [titleBtn]="'addDocument'" [data]="bieuMau"></coquan>
+                </dxi-item>
+              </dxi-tab>
+            </dxi-item>
+
+          </dx-form>
+        </div>
+      </div>
+      
+      <corner-button [items]="listCornerBtn"></corner-button>
+    </div>
+  </div>
+
+</dx-scroll-view>
+
+<chuyentiep-popup
+  [(visible)]="isForwardPopupOpened"
+  [forWard]="{visible: true, onHandle: onForward}"
+  [data]="dataNhanSu"
+></chuyentiep-popup>

@@ -1,0 +1,63 @@
+<form (submit)="onSubmit($event)"  class="change-password-form auth-form">
+  <dx-form [formData]="formData" [disabled]="loading">
+    <dxi-item
+      dataField="password"
+      editorType="dxTextBox"
+      [editorOptions]="{
+        stylingMode: 'filled',
+        mode: 'password'
+      }"
+    >
+      <dxi-validation-rule
+        type="required"
+        [message]="'message-pasword' | translate"
+      ></dxi-validation-rule>
+      <dxo-label [text]="'password' | translate"></dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField="confirmedPassword"
+      editorType="dxTextBox"
+      [editorOptions]="{
+        stylingMode: 'filled',
+        mode: 'password'
+      }"
+    >
+      <dxi-validation-rule
+        type="required"
+        [message]="'message-pasword' | translate"
+      ></dxi-validation-rule>
+      <dxi-validation-rule
+        type="custom"
+        [message]="'message-pasword-error' | translate"
+        [validationCallback]="confirmPassword"
+      >
+      </dxi-validation-rule>
+      <dxo-label [text]="'confirmpassword' | translate"></dxo-label>
+    </dxi-item>
+
+    <dxi-item itemType="button">
+      <dxo-button-options
+        width="100%"
+        height="40px"
+        type="warning"
+        [useSubmitBehavior]="true"
+        [template]="'changePasswordTemplate'"
+      >
+      </dxo-button-options>
+    </dxi-item>
+
+    <ng-container *dxTemplate="let item of 'changePasswordTemplate'">
+      <span class="dx-button-text">
+        <ng-container *ngIf="loading; else notLoading">
+          <dx-load-indicator
+            width="24px"
+            height="24px"
+            [visible]="true"
+          ></dx-load-indicator>
+        </ng-container>
+        <ng-template #notLoading>{{'continue' | translate}}</ng-template>
+      </span>
+    </ng-container>
+  </dx-form>
+</form>

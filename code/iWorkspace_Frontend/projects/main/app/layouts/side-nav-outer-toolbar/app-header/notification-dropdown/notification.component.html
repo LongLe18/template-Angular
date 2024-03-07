@@ -1,0 +1,54 @@
+<div class="notification-panel">
+    <dx-drop-down-button
+        stylingMode="text"
+        dropDownContentTemplate="dropDownTemplate"
+        icon="belloutline"
+        [text]="items.length.toString()"
+        [showArrowIcon]="false"
+        [elementAttr]="{
+            class: 'user-button'
+        }"
+        [dropDownOptions]="{
+            width: '450'
+        }"
+    >
+      <div *dxTemplate="let data of 'dropDownTemplate'">
+        <div style="padding: 12px; font-size: 18px; font-weight: 700;">
+          <div>{{'notification' | translate}}</div>
+          <div style="text-align: right;">
+            <dx-button class="btn-add" [text]="'viewAll' | translate" (onClick)="viewAll()"></dx-button>
+          </div>
+          <!-- <dx-list
+            [dataSource]="data"
+            (onItemClick)="handleListItemClick($event)"
+          >
+            <div *dxTemplate="let item of 'listItem'">
+              <div class="item-notification">
+                <img src="item.avatar"/>
+              </div>  
+            </div>
+          </dx-list> -->
+          <dx-list
+            [dataSource]="items"
+            displayExpr="guid"
+            itemTemplate="listItem"
+            (onItemClick)="handleListItemClick($event)"
+          >
+            <div *dxTemplate="let item of 'listItem'">
+              <div class="item-notification">
+                <img [src]="item.nguoiGui.avatar" alt="avatar" class="avatar-sender"/>
+                <div class="content-notification">
+                  <b>{{item.tieuDe}}</b>
+                  <div class="info-sender">
+                    <span>Người gửi: {{item.nguoiGui.hoVaTen}}</span>
+                    <span style="color: #FF8A00">{{item.thoiGian | date:'dd/MM/yyyy hh:mm:ss' }}</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+          </dx-list>
+        </div>
+      </div>
+    </dx-drop-down-button>
+  </div>
+  

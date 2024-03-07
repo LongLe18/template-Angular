@@ -1,0 +1,8 @@
+spring.datasource.url= jdbc:postgresql://x.x.x.x:5432/iWorkspace
+spring.datasource.username= username
+spring.datasource.password= password
+
+iworkspace.app.jwtSecret= ======================iWorkspace=Spring===========================
+iworkspace.app.jwtExpirationMs= 60000
+iworkspace.app.jwtRefreshExpirationMs= 180000
+

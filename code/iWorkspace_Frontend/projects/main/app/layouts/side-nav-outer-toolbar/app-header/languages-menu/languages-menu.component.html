@@ -1,0 +1,21 @@
+<div class="user-panel">
+  <dx-drop-down-button
+    stylingMode="text"
+    dropDownContentTemplate="dropDownTemplate"
+    [icon]="flagIcon"
+    [showArrowIcon]="false"
+    [elementAttr]="{
+      class: 'user-button'
+    }"
+    [dropDownOptions]="{
+      width: '150'
+    }"
+  >
+    <div *dxTemplate="let data of 'dropDownTemplate'">
+      <dx-list
+        [items]="menuItems"
+        (onItemClick)="handleListItemClick($event)"
+      ></dx-list>
+    </div>
+  </dx-drop-down-button>
+</div>

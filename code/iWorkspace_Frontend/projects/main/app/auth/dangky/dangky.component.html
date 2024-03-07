@@ -1,0 +1,123 @@
+<form class="create-account-form auth-form" (submit)="onSubmit($event)">
+  <dx-form
+    [formData]="formData"
+    [showColonAfterLabel]="true"
+    [showRequiredMark]="false"
+    [disabled]="loading"
+  >
+    <dxi-item
+      dataField="email"
+      editorType="dxTextBox"
+      [editorOptions]="{
+        stylingMode: 'filled',
+        mode: 'email',
+        value: defaultAuthData?.data?.email
+      }"
+    >
+      <dxi-validation-rule
+        type="required"
+        [message]="'message-email' | translate"
+      ></dxi-validation-rule>
+      <dxi-validation-rule
+        type="email"
+        [message]="'message-email-error' | translate"
+      ></dxi-validation-rule>
+      <dxo-label text="Email"></dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField="username"
+      editorType="dxTextBox"
+      [editorOptions]="{
+        stylingMode: 'filled',
+        mode: 'text',
+        value: defaultAuthData?.data?.username
+      }"
+    >
+      <dxi-validation-rule
+        type="required"
+        [message]="'message-username' | translate"
+      ></dxi-validation-rule>
+      <dxo-label [text]="'username' | translate"></dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField="password"
+      editorType="dxTextBox"
+      [editorOptions]="{
+        stylingMode: 'filled',
+        mode: 'password'
+      }"
+    >
+      <dxi-validation-rule
+        type="required"
+        [message]="'message-pasword' | translate"
+      ></dxi-validation-rule>
+      <dxo-label [text]="'password' | translate"></dxo-label>
+    </dxi-item>
+
+    <dxi-item
+      dataField="confirmedPassword"
+      editorType="dxTextBox"
+      [editorOptions]="{
+        stylingMode: 'filled',
+        mode: 'password'
+      }"
+    >
+      <dxi-validation-rule
+        type="required"
+        [message]="'message-pasword' | translate"
+      ></dxi-validation-rule>
+      <dxi-validation-rule
+        type="custom"
+        [message]="'message-pasword-error' | translate"
+        [validationCallback]="confirmPassword"
+      >
+      </dxi-validation-rule>
+      <dxo-label [text]="'confirmpassword' | translate"></dxo-label>
+    </dxi-item>
+
+    <!-- <dxi-item>
+      <div class="policy-info">
+        By creating an account, you agree to the
+        <a [routerLink]="redirectLink">Terms of Service</a> and
+        <a [routerLink]="redirectLink">Privacy Policy</a>
+      </div>
+    </dxi-item> -->
+
+    <dxi-item itemType="button">
+      <dxo-button-options
+        width="100%"
+        height="40px"
+        type="warning"
+        [useSubmitBehavior]="true"
+        [template]="'createAccountTemplate'"
+      >
+      </dxo-button-options>
+    </dxi-item>
+
+    <ng-container *dxTemplate="let item of 'createAccountTemplate'">
+      <span class="dx-button-text">
+        <ng-container *ngIf="loading; else notLoading">
+          <dx-load-indicator
+            width="24px"
+            height="24px"
+            [visible]="true"
+          ></dx-load-indicator>
+        </ng-container>
+
+        <ng-template #notLoading>{{'createaccount' | translate}}</ng-template>
+      </span>
+    </ng-container>
+  </dx-form>
+  <div class="login-link">
+    {{'haveaccount' | translate}}? <a [routerLink]="redirectLink">{{'signin' | translate}}</a>
+  </div>
+  <!-- <app-login-oauth></app-login-oauth> -->
+
+  <div class="description-text">
+    <p><span>Bản quyền thuộc về Đại học Quốc gia Hà Nội</span></p>
+    <p><span>Khu đô thị ĐHQGHN tại Hoà Lạc, Thạch Thất, Hà Nội     </span></p>
+    <p><span>Webmaster: media@vnu.edu.vn</span></p>
+  </div>
+</form>

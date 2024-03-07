@@ -1,0 +1,30 @@
+<popup
+  [titleText]="'sendDoc' | translate"
+  [visible]="visible"
+  [wrapperAttr]="{ class: 'chuyentiep-popup' }"
+  (visibleChange)="changeVisible($event)"
+  [forWard]="forWard"
+>   
+    <dx-data-grid
+        class="grid-popup-chuyentiep"
+        noDataText=""
+        [dataSource]="data"
+        [allowColumnReordering]="true"
+        [columnAutoWidth]="true"
+        [showRowLines]="false"
+    >   
+        <dxo-load-panel [showPane]="false"></dxo-load-panel>
+        <dxo-scrolling rowRenderingMode="virtual"></dxo-scrolling>
+        <dxo-sorting mode="none"></dxo-sorting>
+        <dxo-header-filter [visible]="false"></dxo-header-filter>
+        <dxo-selection
+            selectAllMode="allPages"
+            mode="multiple"
+        ></dxo-selection>
+
+        <dxi-column
+            dataField="hoVaTen"
+            [caption]="'chooseRecipient' | translate"
+        ></dxi-column>
+    </dx-data-grid>
+</popup>

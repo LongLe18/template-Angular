@@ -1,0 +1,12 @@
+<div class="corner-button">
+    <div class="item-button">
+      <dx-button *ngFor="let item of items"
+        [text]="item.label"
+        [icon]="item.icon"
+        [type]="item.type"
+        stylingMode="contained"
+        style="padding: 8px 12px"
+        (onClick)="item.onClick()">
+      </dx-button>
+    </div>
+</div>

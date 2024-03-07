@@ -1,0 +1,14 @@
+để giữ cho controller đơn giản thì các loại exception sẽ không xử lý trong controller, 
+các exception sẽ xử lý ở exceptionhandler, chú ý phân biệt loại system exception và business exception
+=> khi này controller chỉ xử lý trường hợp trả về 200
+khi trả về success controller cũng hạn chế không sử dụng ResponseEntity mà dùng thống nhất dùng @ResponseStatus như:
+
+..
+@ResponseStatus(HttpStatus.CREATED) // 201
+public UserModel createUser(@RequestBody UserDto dto) {
+    return ..;
+}
+
+
+***
+các validate custom cũng hạn chế thực hiện trong controller, nếu có thể tạo custom validator cho các dto thì nên tạo.
